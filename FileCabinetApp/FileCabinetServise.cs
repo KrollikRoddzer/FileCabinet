@@ -15,7 +15,7 @@ public class FileCabinetService
             LastName = lastName,
             Age = age,
             DateOfBirth = dateOfBirth,
-            AYearIncome = incomePerYear,
+            IncomePerYear = incomePerYear,
         };
 
         this.list.Add(record);
