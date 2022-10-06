@@ -1,4 +1,6 @@
-﻿namespace FileCabinetApp
+﻿using System.Globalization;
+
+namespace FileCabinetApp
 {
     public static class Program
     {
@@ -7,6 +9,7 @@
         private const int CommandHelpIndex = 0;
         private const int DescriptionHelpIndex = 1;
         private const int ExplanationHelpIndex = 2;
+        private static FileCabinetService fileCabinetService = new FileCabinetService();
 
         private static bool isRunning = true;
 
@@ -14,12 +17,18 @@
         {
             new Tuple<string, Action<string>>("help", PrintHelp),
             new Tuple<string, Action<string>>("exit", Exit),
+            new Tuple<string, Action<string>>("stat", Stat),
+            new Tuple<string, Action<string>>("create", Create),
+            new Tuple<string, Action<string>>("list", List),
         };
 
         private static string[][] helpMessages = new string[][]
         {
             new string[] { "help", "prints the help screen", "The 'help' command prints the help screen." },
             new string[] { "exit", "exits the application", "The 'exit' command exits the application." },
+            new string[] { "stat", "shows the number of records", "The 'stat' command shows the number of records." },
+            new string[] { "create", "creates a new profile in records.", "The 'create' command creates a new profile in records." },
+            new string[] { "list", "shows all records.", "The 'list' command shows all records." },
         };
 
         public static void Main(string[] args)
@@ -94,6 +103,55 @@
         {
             Console.WriteLine("Exiting an application...");
             isRunning = false;
+        }
+
+        private static void Stat(string parameters)
+        {
+            var recordsCount = Program.fileCabinetService.GetStat();
+            Console.WriteLine($"{recordsCount} record(s).");
+        }
+
+        private static void Create(string parameters)
+        {
+            try
+            {
+                Console.Write("First name: ");
+                string firstName = Console.ReadLine();
+                Console.Write("Last name: ");
+                string lastName = Console.ReadLine();
+                Console.Write("Age: ");
+                short age = Convert.ToInt16(Console.ReadLine());
+                if (age < 0)
+                {
+                    throw new FormatException("Bad format.");
+                }
+
+                Console.Write("Date of birth: ");
+                string dateOfBirth = Console.ReadLine();
+                DateTime birthday = DateTime.Parse(dateOfBirth, CultureInfo.CreateSpecificCulture("en-US"));
+                Console.Write("Income per year: ");
+                decimal incomePerYear = Convert.ToDecimal(Console.ReadLine());
+                if (incomePerYear < 0M)
+                {
+                    throw new FormatException("Bad format.");
+                }
+
+                int profileId = fileCabinetService.CreateRecord(firstName, lastName, age, birthday, incomePerYear);
+                Console.WriteLine($"Record #{profileId} is created.");
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Valid Date of Birth format is mm/dd/yyyy.\nValid age must be not negative integer.\nValid income per year must be non negative real number.");
+            }
+        }
+
+        private static void List(string parameters)
+        {
+            var records = fileCabinetService.GetRecords();
+            foreach (var record in records)
+            {
+                Console.WriteLine(record);
+            }
         }
     }
 }
