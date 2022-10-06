@@ -1,4 +1,6 @@
-﻿namespace FileCabinetApp
+﻿using System.Globalization;
+
+namespace FileCabinetApp
 {
     public static class Program
     {
@@ -17,6 +19,7 @@
             new Tuple<string, Action<string>>("exit", Exit),
             new Tuple<string, Action<string>>("stat", Stat),
             new Tuple<string, Action<string>>("create", Create),
+            new Tuple<string, Action<string>>("list", List),
         };
 
         private static string[][] helpMessages = new string[][]
@@ -25,6 +28,7 @@
             new string[] { "exit", "exits the application", "The 'exit' command exits the application." },
             new string[] { "stat", "show the number of records", "The 'stat' command shows the number of records." },
             new string[] { "create", "creates a new profile in records.", "The 'create' command creates a new profile in records." },
+            new string[] { "list", "show all records.", "The 'list' command shows all records." },
         };
 
         public static void Main(string[] args)
@@ -117,12 +121,21 @@
             string dateOfBirth = Console.ReadLine();
             try
             {
-                int profileId = fileCabinetService.CreateRecord(firstName, lastName, DateTime.Parse(dateOfBirth));
+                int profileId = fileCabinetService.CreateRecord(firstName, lastName, DateTime.Parse(dateOfBirth, CultureInfo.CreateSpecificCulture("en-US")));
                 Console.WriteLine($"Record #{profileId} is created.");
             }
             catch (FormatException)
             {
                 Console.WriteLine("Valid Date of Birth format is mm/dd/yyyy.");
+            }
+        }
+
+        private static void List(string parameters)
+        {
+            var records = fileCabinetService.GetRecords();
+            foreach (var record in records)
+            {
+                Console.WriteLine(record);
             }
         }
     }

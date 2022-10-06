@@ -23,12 +23,11 @@ public class FileCabinetService
 
     public FileCabinetRecord[] GetRecords()
     {
-        // TODO: добавьте реализацию метода
-        return Array.Empty<FileCabinetRecord>();
+        return this.list.ToArray();
     }
 
     public int GetStat()
     {
-        return list.Count;
+        return this.list.Count;
     }
 }
