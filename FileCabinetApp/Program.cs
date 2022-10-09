@@ -20,6 +20,7 @@ namespace FileCabinetApp
             new Tuple<string, Action<string>>("stat", Stat),
             new Tuple<string, Action<string>>("create", Create),
             new Tuple<string, Action<string>>("list", List),
+            new Tuple<string, Action<string>>("edit", Edit),
         };
 
         private static string[][] helpMessages = new string[][]
@@ -29,6 +30,7 @@ namespace FileCabinetApp
             new string[] { "stat", "shows the number of records", "The 'stat' command shows the number of records." },
             new string[] { "create", "creates a new profile in records.", "The 'create' command creates a new profile in records." },
             new string[] { "list", "shows all records.", "The 'list' command shows all records." },
+            new string[] { "edit", "edits a record.", "The 'edit' command edits a record." },
         };
 
         public static void Main(string[] args)
@@ -113,35 +115,78 @@ namespace FileCabinetApp
 
         private static void Create(string parameters)
         {
+            while (true)
+            {
+                try
+                {
+                    Console.Write("First name: ");
+                    string firstName = Console.ReadLine();
+                    Console.Write("Last name: ");
+                    string lastName = Console.ReadLine();
+                    Console.Write("Age: ");
+                    short age = Convert.ToInt16(Console.ReadLine());
+                    Console.Write("Date of birth: ");
+                    string dateOfBirth = Console.ReadLine();
+                    DateTime birthday = DateTime.Parse(dateOfBirth, CultureInfo.CreateSpecificCulture("en-US"));
+                    Console.Write("Income per year: ");
+                    decimal incomePerYear = Convert.ToDecimal(Console.ReadLine());
+                    int profileId = fileCabinetService.CreateRecord(firstName, lastName, age, birthday, incomePerYear);
+                    Console.WriteLine($"Record #{profileId} is created.");
+                    break;
+                }
+                catch (ArgumentNullException e)
+                {
+                    Console.WriteLine(e.Message);
+                    Console.WriteLine("Try again:");
+                }
+                catch (ArgumentException e)
+                {
+                    Console.WriteLine(e.Message);
+                    Console.WriteLine("Try again:");
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Valid Date of Birth format is mm/dd/yyyy.");
+                    Console.WriteLine("Try again:");
+                }
+            }
+        }
+
+        private static void Edit(string parameters)
+        {
             try
             {
-                Console.Write("First name: ");
-                string firstName = Console.ReadLine();
-                Console.Write("Last name: ");
-                string lastName = Console.ReadLine();
-                Console.Write("Age: ");
-                short age = Convert.ToInt16(Console.ReadLine());
-                if (age < 0)
+                int id = Convert.ToInt32(parameters);
+                if (id < fileCabinetService.GetStat())
                 {
-                    throw new FormatException("Bad format.");
+                    throw new ArgumentException($"Record #{id} is not found.");
                 }
 
+                Console.Write("First name: ");
+                string? firstName = Console.ReadLine();
+                Console.Write("Last name: ");
+                string? lastName = Console.ReadLine();
+                Console.Write("Age: ");
+                short age = Convert.ToInt16(Console.ReadLine());
                 Console.Write("Date of birth: ");
                 string dateOfBirth = Console.ReadLine();
                 DateTime birthday = DateTime.Parse(dateOfBirth, CultureInfo.CreateSpecificCulture("en-US"));
                 Console.Write("Income per year: ");
                 decimal incomePerYear = Convert.ToDecimal(Console.ReadLine());
-                if (incomePerYear < 0M)
-                {
-                    throw new FormatException("Bad format.");
-                }
-
-                int profileId = fileCabinetService.CreateRecord(firstName, lastName, age, birthday, incomePerYear);
-                Console.WriteLine($"Record #{profileId} is created.");
+                fileCabinetService.EditRecord(id, firstName, lastName, age, birthday, incomePerYear);
+                Console.WriteLine($"Record #{id} is updated.");
+            }
+            catch (ArgumentNullException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine(e.Message);
             }
             catch (FormatException)
             {
-                Console.WriteLine("Valid Date of Birth format is mm/dd/yyyy.\nValid age must be not negative integer.\nValid income per year must be non negative real number.");
+                Console.WriteLine("Valid Date of Birth format is mm/dd/yyyy.");
             }
         }
 
