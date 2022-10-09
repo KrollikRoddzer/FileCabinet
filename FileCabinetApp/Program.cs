@@ -113,35 +113,40 @@ namespace FileCabinetApp
 
         private static void Create(string parameters)
         {
-            try
+            while (true)
             {
-                Console.Write("First name: ");
-                string firstName = Console.ReadLine();
-                Console.Write("Last name: ");
-                string lastName = Console.ReadLine();
-                Console.Write("Age: ");
-                short age = Convert.ToInt16(Console.ReadLine());
-                if (age < 0)
+                try
                 {
-                    throw new FormatException("Bad format.");
+                    Console.Write("First name: ");
+                    string firstName = Console.ReadLine();
+                    Console.Write("Last name: ");
+                    string lastName = Console.ReadLine();
+                    Console.Write("Age: ");
+                    short age = Convert.ToInt16(Console.ReadLine());
+                    Console.Write("Date of birth: ");
+                    string dateOfBirth = Console.ReadLine();
+                    DateTime birthday = DateTime.Parse(dateOfBirth, CultureInfo.CreateSpecificCulture("en-US"));
+                    Console.Write("Income per year: ");
+                    decimal incomePerYear = Convert.ToDecimal(Console.ReadLine());
+                    int profileId = fileCabinetService.CreateRecord(firstName, lastName, age, birthday, incomePerYear);
+                    Console.WriteLine($"Record #{profileId} is created.");
+                    break;
                 }
-
-                Console.Write("Date of birth: ");
-                string dateOfBirth = Console.ReadLine();
-                DateTime birthday = DateTime.Parse(dateOfBirth, CultureInfo.CreateSpecificCulture("en-US"));
-                Console.Write("Income per year: ");
-                decimal incomePerYear = Convert.ToDecimal(Console.ReadLine());
-                if (incomePerYear < 0M)
+                catch (ArgumentNullException e)
                 {
-                    throw new FormatException("Bad format.");
+                    Console.WriteLine(e.Message);
+                    Console.WriteLine("Try again:");
                 }
-
-                int profileId = fileCabinetService.CreateRecord(firstName, lastName, age, birthday, incomePerYear);
-                Console.WriteLine($"Record #{profileId} is created.");
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("Valid Date of Birth format is mm/dd/yyyy.\nValid age must be not negative integer.\nValid income per year must be non negative real number.");
+                catch (ArgumentException e)
+                {
+                    Console.WriteLine(e.Message);
+                    Console.WriteLine("Try again:");
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Valid Date of Birth format is mm/dd/yyyy.");
+                    Console.WriteLine("Try again:");
+                }
             }
         }
 
