@@ -3,7 +3,7 @@ namespace FileCabinetApp;
 /// <summary>
 /// Criteria used in Find meethod in FileCabinetSetvise.
 /// </summary>
-internal enum EFindCriteria
+public enum EFindCriteria
 {
     /// <summary>
     /// Searching by first name.

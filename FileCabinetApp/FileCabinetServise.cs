@@ -1,11 +1,33 @@
 using System;
 using System.Globalization;
+using System.Linq;
 
 namespace FileCabinetApp;
 
 public class FileCabinetService
 {
     private readonly List<FileCabinetRecord> list = new List<FileCabinetRecord>();
+
+    public FileCabinetRecord[] Find(EFindCriteria criteria, string parameter)
+    {
+        switch (criteria)
+        {
+            case EFindCriteria.FirstName:
+                return this.list.Where((record) => record.FirstName.Equals(parameter)).ToArray();
+            case EFindCriteria.LastName:
+                return this.list.Where(record => record.LastName.Equals(parameter)).ToArray();
+            case EFindCriteria.Age:
+                return this.list.Where(record => record.Age.Equals(Convert.ToInt16(parameter))).ToArray();
+            case EFindCriteria.DataOfBirth:
+                return this.list.Where(record => record.DateOfBirth.Equals(DateTime.Parse(parameter, CultureInfo.CreateSpecificCulture("en-US")))).ToArray();
+            case EFindCriteria.IncomePerYear:
+                return this.list.Where(record => record.IncomePerYear.Equals(Convert.ToDecimal(parameter))).ToArray();
+            case EFindCriteria.Id:
+                return this.list.Where(record => record.Id.Equals(Convert.ToInt32(parameter))).ToArray();
+            default:
+                throw new ArgumentException("Something wrong with the criteria.");
+        }
+    }
 
     public int CreateRecord(string? firstName, string? lastName, short age, DateTime dateOfBirth, decimal incomePerYear)
     {
