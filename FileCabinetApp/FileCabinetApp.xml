@@ -4,5 +4,40 @@
         <name>FileCabinetApp</name>
     </assembly>
     <members>
+        <member name="T:FileCabinetApp.EFindCriteria">
+            <summary>
+            Criteria used in Find meethod in FileCabinetSetvise.
+            </summary>
+        </member>
+        <member name="F:FileCabinetApp.EFindCriteria.FirstName">
+            <summary>
+            Searching by first name.
+            </summary>
+        </member>
+        <member name="F:FileCabinetApp.EFindCriteria.LastName">
+            <summary>
+            Searching by last name.
+            </summary>
+        </member>
+        <member name="F:FileCabinetApp.EFindCriteria.Age">
+            <summary>
+            Searching by age.
+            </summary>
+        </member>
+        <member name="F:FileCabinetApp.EFindCriteria.DataOfBirth">
+            <summary>
+            Searching by date of birth.
+            </summary>
+        </member>
+        <member name="F:FileCabinetApp.EFindCriteria.IncomePerYear">
+            <summary>
+            Searching by income per year.
+            </summary>
+        </member>
+        <member name="F:FileCabinetApp.EFindCriteria.Id">
+            <summary>
+            Searching by id.
+            </summary>
+        </member>
     </members>
 </doc>
