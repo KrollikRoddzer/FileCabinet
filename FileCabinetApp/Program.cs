@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.Text;
 
 namespace FileCabinetApp
 {
@@ -21,6 +22,7 @@ namespace FileCabinetApp
             new Tuple<string, Action<string>>("create", Create),
             new Tuple<string, Action<string>>("list", List),
             new Tuple<string, Action<string>>("edit", Edit),
+            new Tuple<string, Action<string>>("find", Find),
         };
 
         private static string[][] helpMessages = new string[][]
@@ -31,6 +33,7 @@ namespace FileCabinetApp
             new string[] { "create", "creates a new profile in records.", "The 'create' command creates a new profile in records." },
             new string[] { "list", "shows all records.", "The 'list' command shows all records." },
             new string[] { "edit", "edits a record.", "The 'edit' command edits a record." },
+            new string[] { "find", "finding list of elements in record which satisfing some criteria.", "The 'find' command is finding list of elements in record which satisfing some criteria." },
         };
 
         public static void Main(string[] args)
@@ -196,6 +199,91 @@ namespace FileCabinetApp
             foreach (var record in records)
             {
                 Console.WriteLine(record);
+            }
+        }
+
+        private static void Find(string parameters)
+        {
+            try
+            {
+                string[] criteriaAndElement = parameters.Split(' ');
+                if (criteriaAndElement.Length != 2)
+                {
+                    throw new ArgumentException("Find command must look like this:\nfind {criteria} {parameter to compare}");
+                }
+
+                string criteria = criteriaAndElement[0].ToLower();
+                string element = criteriaAndElement[1].ToLower();
+
+                switch (criteria)
+                {
+                    case "firstname":
+                        if (element is null)
+                        {
+                            throw new ArgumentNullException("First name length must cosists from 2 to 60 letters.");
+                        }
+
+                        PrintFind(EFindCriteria.FirstName, element);
+                        break;
+                    case "lastname":
+                        if (element is null)
+                        {
+                            throw new ArgumentNullException("Last name length must cosists from 2 to 60 letters.");
+                        }
+
+                        PrintFind(EFindCriteria.LastName, element);
+                        break;
+                    case "age":
+                        int age;
+                        if (!Int32.TryParse(element, out age))
+                        {
+                            throw new ArgumentException("Must be integer.");
+                        }
+
+                        PrintFind(EFindCriteria.Age, element);
+                        break;
+                    case "dateofbirth":
+                        DateTime dateOfBirth;
+                        if (!DateTime.TryParse(element, out dateOfBirth))
+                        {
+                            throw new ArgumentException("Valid date of birth format: mm/dd/yyyy.");
+                        }
+
+                        PrintFind(EFindCriteria.DataOfBirth, element);
+                        break;
+                    case "incomeperyear":
+                        double incomePerYear;
+                        if (!Double.TryParse(element, out incomePerYear))
+                        {
+                            throw new ArgumentException("Must be real number.");
+                        }
+
+                        PrintFind(EFindCriteria.IncomePerYear, element);
+                        break;
+                    case "id":
+                        int id;
+                        if (!Int32.TryParse(element, out id))
+                        {
+                            throw new ArgumentException("Must integer number.");
+                        }
+
+                        PrintFind(EFindCriteria.Id, element);
+                        break;
+                    default:
+                        throw new ArgumentException("Field are availible to find:\n||||||||||||||||\n->FirstName\n->LastName\n->Age\n->DateOfBirth\n->IncomePerYear\n->Id\n||||||||||||||||");
+                }
+            }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
+        private static void PrintFind(EFindCriteria criteria, string element)
+        {
+            foreach (var el in fileCabinetService.Find(criteria, element))
+            {
+                Console.WriteLine(el);
             }
         }
     }

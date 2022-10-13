@@ -13,9 +13,9 @@ public class FileCabinetService
         switch (criteria)
         {
             case EFindCriteria.FirstName:
-                return this.list.Where((record) => record.FirstName.Equals(parameter)).ToArray();
+                return this.list.Where((record) => record.FirstName.ToLower().Equals(parameter)).ToArray();
             case EFindCriteria.LastName:
-                return this.list.Where(record => record.LastName.Equals(parameter)).ToArray();
+                return this.list.Where(record => record.LastName.ToLower().Equals(parameter)).ToArray();
             case EFindCriteria.Age:
                 return this.list.Where(record => record.Age.Equals(Convert.ToInt16(parameter))).ToArray();
             case EFindCriteria.DataOfBirth:
