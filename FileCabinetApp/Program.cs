@@ -1,6 +1,8 @@
 ﻿using System.Globalization;
 using System.Text;
 
+#nullable disable
+
 namespace FileCabinetApp
 {
     public static class Program
@@ -166,9 +168,9 @@ namespace FileCabinetApp
                 }
 
                 Console.Write("First name: ");
-                string? firstName = Console.ReadLine();
+                string firstName = Console.ReadLine();
                 Console.Write("Last name: ");
-                string? lastName = Console.ReadLine();
+                string lastName = Console.ReadLine();
                 Console.Write("Age: ");
                 short age = Convert.ToInt16(Console.ReadLine());
                 Console.Write("Date of birth: ");
@@ -235,7 +237,7 @@ namespace FileCabinetApp
                         break;
                     case "age":
                         int age;
-                        if (!Int32.TryParse(element, out age))
+                        if (!int.TryParse(element, out age))
                         {
                             throw new ArgumentException("Must be integer.");
                         }
@@ -253,7 +255,7 @@ namespace FileCabinetApp
                         break;
                     case "incomeperyear":
                         double incomePerYear;
-                        if (!Double.TryParse(element, out incomePerYear))
+                        if (!double.TryParse(element, out incomePerYear))
                         {
                             throw new ArgumentException("Must be real number.");
                         }
@@ -262,7 +264,7 @@ namespace FileCabinetApp
                         break;
                     case "id":
                         int id;
-                        if (!Int32.TryParse(element, out id))
+                        if (!int.TryParse(element, out id))
                         {
                             throw new ArgumentException("Must integer number.");
                         }

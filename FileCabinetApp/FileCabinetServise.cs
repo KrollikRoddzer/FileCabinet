@@ -1,6 +1,8 @@
-using System;
+﻿using System;
 using System.Globalization;
 using System.Linq;
+
+#nullable disable
 
 namespace FileCabinetApp;
 
@@ -29,7 +31,7 @@ public class FileCabinetService
         }
     }
 
-    public int CreateRecord(string? firstName, string? lastName, short age, DateTime dateOfBirth, decimal incomePerYear)
+    public int CreateRecord(string firstName, string lastName, short age, DateTime dateOfBirth, decimal incomePerYear)
     {
         if (firstName is null)
         {
@@ -81,7 +83,7 @@ public class FileCabinetService
         return record.Id;
     }
 
-    public void EditRecord(int id, string? firstName, string? lastName, short age, DateTime dateOfBirth, decimal incomePerYear)
+    public void EditRecord(int id, string firstName, string lastName, short age, DateTime dateOfBirth, decimal incomePerYear)
     {
         if (firstName is null)
         {

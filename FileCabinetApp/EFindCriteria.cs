@@ -1,4 +1,4 @@
-namespace FileCabinetApp;
+﻿namespace FileCabinetApp;
 
 /// <summary>
 /// Criteria used in Find meethod in FileCabinetSetvise.
