@@ -39,5 +39,170 @@
             Searching by id.
             </summary>
         </member>
+        <member name="T:FileCabinetApp.FileCabinetRecord">
+            <summary>
+            Class for creating records in FileCabinetServise.
+            </summary>
+        </member>
+        <member name="P:FileCabinetApp.FileCabinetRecord.Id">
+            <summary>
+            Gets or sets Id of a person.
+            </summary>
+            <value> Id. </value>
+        </member>
+        <member name="P:FileCabinetApp.FileCabinetRecord.FirstName">
+            <summary>
+            Gets or sets First name of a person.
+            </summary>
+            <value> First name. </value>
+        </member>
+        <member name="P:FileCabinetApp.FileCabinetRecord.LastName">
+            <summary>
+            Gets or sets Last name of a person.
+            </summary>
+            <value> Last name. </value>
+        </member>
+        <member name="P:FileCabinetApp.FileCabinetRecord.Age">
+            <summary>
+            Gets or sets Age of a person.
+            </summary>
+            <value> Age. </value>
+        </member>
+        <member name="P:FileCabinetApp.FileCabinetRecord.DateOfBirth">
+            <summary>
+            Gets or sets Date of birthday of a person.
+            </summary>
+            <value> Birthday date. </value>
+        </member>
+        <member name="P:FileCabinetApp.FileCabinetRecord.IncomePerYear">
+            <summary>
+            Gets or sets Salary of a person.
+            </summary>
+            <value> Income every year. </value>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetRecord.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:FileCabinetApp.FileCabinetService">
+            <summary>
+            Class that holds every command in application.
+            </summary>
+        </member>
+        <member name="F:FileCabinetApp.FileCabinetService.list">
+            <summary>
+            List that holds every record.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetService.Find(FileCabinetApp.EFindCriteria,System.String)">
+            <summary>
+            Finds records in list accoarding to criteria.
+            </summary>
+            <param name="criteria"> Criteria according to is searched record. </param>
+            <param name="parameter"> Parameter we use to compare records. </param>
+            <returns> Returns array of found records. </returns>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetService.CreateRecord(FileCabinetApp.CreateRecordParameters)">
+            <summary>
+            Creates record.
+            </summary>
+            <param name="parameters"> Class used for parametes of this method. </param>
+            <returns> Id of record. </returns>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetService.EditRecord(FileCabinetApp.EditRecordParameters)">
+            <summary>
+            Edits record.
+            </summary>
+            <param name="parameters"> Class used for parametes of this method. </param>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetService.GetRecords">
+            <summary>
+            Method that return array of records.
+            </summary>
+            <returns> Returns recods array. </returns>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetService.GetStat">
+            <summary>
+            Returns stat of list.
+            </summary>
+            <returns> Returns number of records. </returns>
+        </member>
+        <member name="T:FileCabinetApp.CreateRecordParameters">
+            <summary>
+            Parameters class for CreateRecord method in class FileCabinetSurvise.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.CreateRecordParameters.#ctor(System.String,System.String,System.Int16,System.DateTime,System.Decimal)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FileCabinetApp.CreateRecordParameters"/> class.
+            </summary>
+            <param name="firstName"> First name of a person. </param>
+            <param name="lastName"> Last name of a person. </param>
+            <param name="age"> Age of a person. </param>
+            <param name="dateOfBirth"> Birthday date of a person. </param>
+            <param name="incomePerYear"> Salary of a person. </param>
+        </member>
+        <member name="P:FileCabinetApp.CreateRecordParameters.FirstName">
+            <summary>
+            Gets First Name of a person.
+            </summary>
+            <value> First Name. </value>
+        </member>
+        <member name="P:FileCabinetApp.CreateRecordParameters.LastName">
+            <summary>
+            Gets Last Name of a person.
+            </summary>
+            <value> Last Name. </value>
+        </member>
+        <member name="P:FileCabinetApp.CreateRecordParameters.Age">
+            <summary>
+            Gets Age of person.
+            </summary>
+            <value> Age. </value>
+        </member>
+        <member name="P:FileCabinetApp.CreateRecordParameters.DateOfBirth">
+            <summary>
+            Gets Date of Birth of a person.
+            </summary>
+            <value> Date of Birth. </value>
+        </member>
+        <member name="P:FileCabinetApp.CreateRecordParameters.IncomePerYear">
+            <summary>
+            Gets Salary of a person.
+            </summary>
+            <value> Income per year. </value>
+        </member>
+        <member name="T:FileCabinetApp.EditRecordParameters">
+            <summary>
+            Parameters class for EditRecord method in FileCabinetSevise.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.EditRecordParameters.#ctor(System.Int32,System.String,System.String,System.Int16,System.DateTime,System.Decimal)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FileCabinetApp.EditRecordParameters"/> class.
+            </summary>
+            <param name="id"> Identification number. </param>
+            <param name="firstName"> First name of a person. </param>
+            <param name="lastName"> Last name of a person. </param>
+            <param name="age"> Age of a person. </param>
+            <param name="dateOfBirth"> Birthday date of a person. </param>
+            <param name="incomePerYear"> Salary of a person. </param>
+        </member>
+        <member name="P:FileCabinetApp.EditRecordParameters.Id">
+            <summary>
+            Gets Identification number.
+            </summary>
+            <value> Identificatoin number. </value>
+        </member>
+        <member name="T:FileCabinetApp.Program">
+            <summary>
+            Main class in the program that holds the application.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.Program.Main(System.String[])">
+            <summary>
+            Main function of application that holds everyting.
+            </summary>
+            <param name="args"> Parameters of a command line. </param>
+        </member>
     </members>
 </doc>

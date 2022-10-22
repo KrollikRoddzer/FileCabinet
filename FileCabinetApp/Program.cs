@@ -5,6 +5,9 @@ using System.Text;
 
 namespace FileCabinetApp
 {
+    /// <summary>
+    /// Main class in the program that holds the application.
+    /// </summary>
     public static class Program
     {
         private const string DeveloperName = "Stanislau Zaitsau";
@@ -38,6 +41,10 @@ namespace FileCabinetApp
             new string[] { "find", "finding list of elements in record which satisfing some criteria.", "The 'find' command is finding list of elements in record which satisfing some criteria." },
         };
 
+        /// <summary>
+        /// Main function of application that holds everyting.
+        /// </summary>
+        /// <param name="args"> Parameters of a command line. </param>
         public static void Main(string[] args)
         {
             Console.WriteLine($"File Cabinet Application, developed by {Program.DeveloperName}");
@@ -135,7 +142,7 @@ namespace FileCabinetApp
                     DateTime birthday = DateTime.Parse(dateOfBirth, CultureInfo.CreateSpecificCulture("en-US"));
                     Console.Write("Income per year: ");
                     decimal incomePerYear = Convert.ToDecimal(Console.ReadLine());
-                    int profileId = fileCabinetService.CreateRecord(firstName, lastName, age, birthday, incomePerYear);
+                    int profileId = fileCabinetService.CreateRecord(new CreateRecordParameters(firstName, lastName, age, birthday, incomePerYear));
                     Console.WriteLine($"Record #{profileId} is created.");
                     break;
                 }
@@ -161,10 +168,19 @@ namespace FileCabinetApp
         {
             try
             {
+                if (parameters.Length == 0)
+                {
+                    throw new ArgumentException("The proper use of edit command is:\n-> edit {Id}");
+                }
+
                 int id = Convert.ToInt32(parameters);
-                if (id < fileCabinetService.GetStat())
+                if (id > fileCabinetService.GetStat())
                 {
                     throw new ArgumentException($"Record #{id} is not found.");
+                }
+                else if (id <= 0)
+                {
+                    throw new ArgumentException("Id must be a positive integer.");
                 }
 
                 Console.Write("First name: ");
@@ -178,7 +194,7 @@ namespace FileCabinetApp
                 DateTime birthday = DateTime.Parse(dateOfBirth, CultureInfo.CreateSpecificCulture("en-US"));
                 Console.Write("Income per year: ");
                 decimal incomePerYear = Convert.ToDecimal(Console.ReadLine());
-                fileCabinetService.EditRecord(id, firstName, lastName, age, birthday, incomePerYear);
+                fileCabinetService.EditRecord(new EditRecordParameters(id, firstName, lastName, age, birthday, incomePerYear));
                 Console.WriteLine($"Record #{id} is updated.");
             }
             catch (ArgumentNullException e)

@@ -6,10 +6,22 @@ using System.Linq;
 
 namespace FileCabinetApp;
 
+/// <summary>
+/// Class that holds every command in application.
+/// </summary>
 public class FileCabinetService
 {
+    /// <summary>
+    /// List that holds every record.
+    /// </summary>
     private readonly List<FileCabinetRecord> list = new List<FileCabinetRecord>();
 
+    /// <summary>
+    /// Finds records in list accoarding to criteria.
+    /// </summary>
+    /// <param name="criteria"> Criteria according to is searched record. </param>
+    /// <param name="parameter"> Parameter we use to compare records. </param>
+    /// <returns> Returns array of found records. </returns>
     public FileCabinetRecord[] Find(EFindCriteria criteria, string parameter)
     {
         switch (criteria)
@@ -31,39 +43,44 @@ public class FileCabinetService
         }
     }
 
-    public int CreateRecord(string firstName, string lastName, short age, DateTime dateOfBirth, decimal incomePerYear)
+    /// <summary>
+    /// Creates record.
+    /// </summary>
+    /// <param name="parameters"> Class used for parametes of this method. </param>
+    /// <returns> Id of record. </returns>
+    public int CreateRecord(CreateRecordParameters parameters)
     {
-        if (firstName is null)
+        if (parameters.FirstName is null)
         {
-            throw new ArgumentNullException(nameof(firstName), "First name should be from 2 to 60 letters length.");
+            throw new ArgumentNullException(nameof(parameters.FirstName), "First name should be from 2 to 60 letters length.");
         }
 
-        if (firstName.Length < 2 || firstName.Length > 60)
+        if (parameters.FirstName.Length < 2 || parameters.FirstName.Length > 60)
         {
-            throw new ArgumentException("First name should be from 2 to 60 letters length.", nameof(firstName));
+            throw new ArgumentException("First name should be from 2 to 60 letters length.", nameof(parameters.FirstName));
         }
 
-        if (lastName is null)
+        if (parameters.LastName is null)
         {
-            throw new ArgumentNullException(nameof(lastName), "First name should be from 2 to 60 letters length.");
+            throw new ArgumentNullException(nameof(parameters.LastName), "First name should be from 2 to 60 letters length.");
         }
 
-        if (lastName.Length < 2 || lastName.Length > 60)
+        if (parameters.LastName.Length < 2 || parameters.LastName.Length > 60)
         {
-            throw new ArgumentException("First name should be from 2 to 60 letters length.", nameof(lastName));
+            throw new ArgumentException("First name should be from 2 to 60 letters length.", nameof(parameters.LastName));
         }
 
-        if (age < 0 || age > 75)
+        if (parameters.Age < 0 || parameters.Age > 75)
         {
-            throw new ArgumentException("Age shout be an integer number from 0 to 75.", nameof(age));
+            throw new ArgumentException("parameters.Age shout be an integer number from 0 to 75.", nameof(parameters.Age));
         }
 
-        if (dateOfBirth.CompareTo(new DateTime(1950, 1, 1)) < 0 || dateOfBirth.CompareTo(DateTime.Now) > 0)
+        if (parameters.DateOfBirth.CompareTo(new DateTime(1950, 1, 1)) < 0 || parameters.DateOfBirth.CompareTo(DateTime.Now) > 0)
         {
             throw new ArgumentException($"Date of birth must be from {new DateTime(1950, 1, 1).ToString("yyyy-MMM-dd", CultureInfo.CreateSpecificCulture("en-US"))} to {DateTime.Now.ToString("yyyy-MMM-dd", CultureInfo.CreateSpecificCulture("en-US"))}.");
         }
 
-        if (incomePerYear < 0)
+        if (parameters.IncomePerYear < 0)
         {
             throw new ArgumentException("Income must be a real number greater than zero.");
         }
@@ -71,11 +88,11 @@ public class FileCabinetService
         var record = new FileCabinetRecord
         {
             Id = this.list.Count + 1,
-            FirstName = firstName,
-            LastName = lastName,
-            Age = age,
-            DateOfBirth = dateOfBirth,
-            IncomePerYear = incomePerYear,
+            FirstName = parameters.FirstName,
+            LastName = parameters.LastName,
+            Age = parameters.Age,
+            DateOfBirth = parameters.DateOfBirth,
+            IncomePerYear = parameters.IncomePerYear,
         };
 
         this.list.Add(record);
@@ -83,59 +100,71 @@ public class FileCabinetService
         return record.Id;
     }
 
-    public void EditRecord(int id, string firstName, string lastName, short age, DateTime dateOfBirth, decimal incomePerYear)
+    /// <summary>
+    /// Edits record.
+    /// </summary>
+    /// <param name="parameters"> Class used for parametes of this method. </param>
+    public void EditRecord(EditRecordParameters parameters)
     {
-        if (firstName is null)
+        if (parameters.FirstName is null)
         {
-            throw new ArgumentNullException(nameof(firstName), "First name should be from 2 to 60 letters length.");
+            throw new ArgumentNullException(nameof(parameters.FirstName), "First name should be from 2 to 60 letters length.");
         }
 
-        if (firstName.Length < 2 || firstName.Length > 60)
+        if (parameters.FirstName.Length < 2 || parameters.FirstName.Length > 60)
         {
-            throw new ArgumentException("First name should be from 2 to 60 letters length.", nameof(firstName));
+            throw new ArgumentException("First name should be from 2 to 60 letters length.", nameof(parameters.FirstName));
         }
 
-        if (lastName is null)
+        if (parameters.LastName is null)
         {
-            throw new ArgumentNullException(nameof(lastName), "First name should be from 2 to 60 letters length.");
+            throw new ArgumentNullException(nameof(parameters.LastName), "First name should be from 2 to 60 letters length.");
         }
 
-        if (lastName.Length < 2 || lastName.Length > 60)
+        if (parameters.LastName.Length < 2 || parameters.LastName.Length > 60)
         {
-            throw new ArgumentException("First name should be from 2 to 60 letters length.", nameof(lastName));
+            throw new ArgumentException("First name should be from 2 to 60 letters length.", nameof(parameters.LastName));
         }
 
-        if (age < 0 || age > 75)
+        if (parameters.Age < 0 || parameters.Age > 75)
         {
-            throw new ArgumentException("Age shout be an integer number from 0 to 75.", nameof(age));
+            throw new ArgumentException("parameters.Age shout be an integer number from 0 to 75.", nameof(parameters.Age));
         }
 
-        if (dateOfBirth.CompareTo(new DateTime(1950, 1, 1)) < 0 || dateOfBirth.CompareTo(DateTime.Now) > 0)
+        if (parameters.DateOfBirth.CompareTo(new DateTime(1950, 1, 1)) < 0 || parameters.DateOfBirth.CompareTo(DateTime.Now) > 0)
         {
             throw new ArgumentException($"Date of birth must be from {new DateTime(1950, 1, 1).ToString("yyyy-MMM-dd", CultureInfo.CreateSpecificCulture("en-US"))} to {DateTime.Now.ToString("yyyy-MMM-dd", CultureInfo.CreateSpecificCulture("en-US"))}.");
         }
 
-        if (incomePerYear < 0)
+        if (parameters.IncomePerYear < 0)
         {
             throw new ArgumentException("Income must be a real number greater than zero.");
         }
 
-        this.list[id - 1] = new FileCabinetRecord
+        this.list[parameters.Id - 1] = new FileCabinetRecord
         {
             Id = this.list.Count + 1,
-            FirstName = firstName,
-            LastName = lastName,
-            Age = age,
-            DateOfBirth = dateOfBirth,
-            IncomePerYear = incomePerYear,
+            FirstName = parameters.FirstName,
+            LastName = parameters.LastName,
+            Age = parameters.Age,
+            DateOfBirth = parameters.DateOfBirth,
+            IncomePerYear = parameters.IncomePerYear,
         };
     }
 
+    /// <summary>
+    /// Method that return array of records.
+    /// </summary>
+    /// <returns> Returns recods array. </returns>
     public FileCabinetRecord[] GetRecords()
     {
         return this.list.ToArray();
     }
 
+    /// <summary>
+    /// Returns stat of list.
+    /// </summary>
+    /// <returns> Returns number of records. </returns>
     public int GetStat()
     {
         return this.list.Count;
