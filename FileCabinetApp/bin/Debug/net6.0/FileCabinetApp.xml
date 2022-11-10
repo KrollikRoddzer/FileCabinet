@@ -39,6 +39,50 @@
             Searching by id.
             </summary>
         </member>
+        <member name="T:FileCabinetApp.FileCabinetCustomServise">
+            <summary>
+            Class that holds every command in application with custom validation.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetCustomServise.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FileCabinetApp.FileCabinetCustomServise"/> class.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetCustomServise.ValidateParameters(FileCabinetApp.CreateRecordParameters)">
+            <summary>
+            Validation method with custom rules.
+            </summary>
+            <param name="parameters"> Parameter for creating record. </param>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetCustomServise.CheckForValidDataInFirstName(System.String)">
+            <summary>
+            Checks first name parameter for valid data.
+            </summary>
+            <param name="firstName"> First name parameter. </param>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetCustomServise.CheckForValidDataInLastName(System.String)">
+            <summary>
+            Checks last name parameter for valid data.
+            </summary>
+            <param name="lastName"> Last name parameter. </param>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetCustomServise.CheckForValidDataInAge(System.Int16)">
+            <summary>
+            Checks age parameter for valid data.
+            </summary>
+            <param name="age"> Age parameter. </param>
+        </member>
+        <member name="T:FileCabinetApp.FileCabinetDeafaultServise">
+            <summary>
+            Class that holds every command in application with default validation.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetDeafaultServise.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FileCabinetApp.FileCabinetDeafaultServise"/> class.
+            </summary>
+        </member>
         <member name="T:FileCabinetApp.FileCabinetRecord">
             <summary>
             Class for creating records in FileCabinetServise.
@@ -125,6 +169,54 @@
             Returns stat of list.
             </summary>
             <returns> Returns number of records. </returns>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetService.ValidateParameters(FileCabinetApp.CreateRecordParameters)">
+            <summary>
+            Validation method with default rules.
+            </summary>
+            <param name="parameters"> Parameter for creating record. </param>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetService.CheckForNullInFirstName(System.String)">
+            <summary>
+            Checks first name parameter for null.
+            </summary>
+            <param name="firstName"> First name parameter. </param>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetService.CheckForValidDataInFirstName(System.String)">
+            <summary>
+            Checks first name parameter for valid data.
+            </summary>
+            <param name="firstName"> First name parameter. </param>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetService.CheckForNullInLastName(System.String)">
+            <summary>
+            Checks last name parameter for null.
+            </summary>
+            <param name="lastName"> Last name parameter. </param>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetService.CheckForValidDataInLastName(System.String)">
+            <summary>
+            Checks last name parameter for valid data.
+            </summary>
+            <param name="lastName"> Last name parameter. </param>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetService.CheckForValidDataInAge(System.Int16)">
+            <summary>
+            Checks age parameter for valid data.
+            </summary>
+            <param name="age"> Age parameter. </param>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetService.CheckForValidDataInDateOfBirthday(System.DateTime)">
+            <summary>
+            Checks birthday parameter for valid data.
+            </summary>
+            <param name="dateOfBirth"> Birthday parameter. </param>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetService.CheckForValidDataInIncomePerYear(System.Decimal)">
+            <summary>
+            Checks income parameter for valid data.
+            </summary>
+            <param name="incomePerYear"> Income parameter. </param>
         </member>
         <member name="T:FileCabinetApp.CreateRecordParameters">
             <summary>

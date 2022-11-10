@@ -1,12 +1,22 @@
 ﻿namespace FileCabinetApp;
 
+/// <summary>
+/// Class that holds every command in application with custom validation.
+/// </summary>
 public class FileCabinetCustomServise : FileCabinetService
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="FileCabinetCustomServise"/> class.
+    /// </summary>
     public FileCabinetCustomServise()
     : base()
     {
     }
 
+    /// <summary>
+    /// Validation method with custom rules.
+    /// </summary>
+    /// <param name="parameters"> Parameter for creating record. </param>
     protected override void ValidateParameters(CreateRecordParameters parameters)
     {
         this.CheckForNullInFirstName(parameters.FirstName);
@@ -17,6 +27,10 @@ public class FileCabinetCustomServise : FileCabinetService
         this.CheckForValidDataInIncomePerYear(parameters.IncomePerYear);
     }
 
+    /// <summary>
+    /// Checks first name parameter for valid data.
+    /// </summary>
+    /// <param name="firstName"> First name parameter. </param>
     protected override void CheckForValidDataInFirstName(string firstName)
     {
         if (firstName.Length <= 0)
@@ -25,6 +39,10 @@ public class FileCabinetCustomServise : FileCabinetService
         }
     }
 
+    /// <summary>
+    /// Checks last name parameter for valid data.
+    /// </summary>
+    /// <param name="lastName"> Last name parameter. </param>
     protected override void CheckForValidDataInLastName(string lastName)
     {
         if (lastName.Length <= 0)
@@ -33,6 +51,10 @@ public class FileCabinetCustomServise : FileCabinetService
         }
     }
 
+    /// <summary>
+    /// Checks age parameter for valid data.
+    /// </summary>
+    /// <param name="age"> Age parameter. </param>
     protected override void CheckForValidDataInAge(short age)
     {
         if (age < 0)

@@ -104,6 +104,10 @@ public class FileCabinetService
         return this.list.Count;
     }
 
+    /// <summary>
+    /// Validation method with default rules.
+    /// </summary>
+    /// <param name="parameters"> Parameter for creating record. </param>
     protected virtual void ValidateParameters(CreateRecordParameters parameters)
     {
         this.CheckForNullInFirstName(parameters.FirstName);
@@ -115,6 +119,10 @@ public class FileCabinetService
         this.CheckForValidDataInIncomePerYear(parameters.IncomePerYear);
     }
 
+    /// <summary>
+    /// Checks first name parameter for null.
+    /// </summary>
+    /// <param name="firstName"> First name parameter. </param>
     protected void CheckForNullInFirstName(string firstName)
     {
         if (firstName is null)
@@ -123,6 +131,10 @@ public class FileCabinetService
         }
     }
 
+    /// <summary>
+    /// Checks first name parameter for valid data.
+    /// </summary>
+    /// <param name="firstName"> First name parameter. </param>
     protected virtual void CheckForValidDataInFirstName(string firstName)
     {
         if (firstName.Length < 2 || firstName.Length > 60)
@@ -131,6 +143,10 @@ public class FileCabinetService
         }
     }
 
+    /// <summary>
+    /// Checks last name parameter for null.
+    /// </summary>
+    /// <param name="lastName"> Last name parameter. </param>
     protected void CheckForNullInLastName(string lastName)
     {
         if (lastName is null)
@@ -139,6 +155,10 @@ public class FileCabinetService
         }
     }
 
+    /// <summary>
+    /// Checks last name parameter for valid data.
+    /// </summary>
+    /// <param name="lastName"> Last name parameter. </param>
     protected virtual void CheckForValidDataInLastName(string lastName)
     {
         if (lastName.Length < 2 || lastName.Length > 60)
@@ -147,6 +167,10 @@ public class FileCabinetService
         }
     }
 
+    /// <summary>
+    /// Checks age parameter for valid data.
+    /// </summary>
+    /// <param name="age"> Age parameter. </param>
     protected virtual void CheckForValidDataInAge(short age)
     {
         if (age < 0 || age > 75)
@@ -155,6 +179,10 @@ public class FileCabinetService
         }
     }
 
+    /// <summary>
+    /// Checks birthday parameter for valid data.
+    /// </summary>
+    /// <param name="dateOfBirth"> Birthday parameter. </param>
     protected virtual void CheckForValidDataInDateOfBirthday(DateTime dateOfBirth)
     {
         if (dateOfBirth.CompareTo(new DateTime(1950, 1, 1)) < 0 || dateOfBirth.CompareTo(DateTime.Now) > 0)
@@ -163,6 +191,10 @@ public class FileCabinetService
         }
     }
 
+    /// <summary>
+    /// Checks income parameter for valid data.
+    /// </summary>
+    /// <param name="incomePerYear"> Income parameter. </param>
     protected virtual void CheckForValidDataInIncomePerYear(decimal incomePerYear)
     {
         if (incomePerYear < 0)
