@@ -77,7 +77,7 @@ public class FileCabinetService
 
         this.list[parameters.Id - 1] = new FileCabinetRecord
         {
-            Id = this.list.Count + 1,
+            Id = parameters.Id,
             FirstName = parameters.FirstName,
             LastName = parameters.LastName,
             Age = parameters.Age,
