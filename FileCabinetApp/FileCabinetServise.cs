@@ -104,7 +104,7 @@ public class FileCabinetService
         return this.list.Count;
     }
 
-    virtual protected void ValidateParameters(CreateRecordParameters parameters)
+    protected virtual void ValidateParameters(CreateRecordParameters parameters)
     {
         this.CheckForNullInFirstName(parameters.FirstName);
         this.CheckForValidDataInFirstName(parameters.FirstName);
@@ -123,7 +123,7 @@ public class FileCabinetService
         }
     }
 
-    virtual protected void CheckForValidDataInFirstName(string firstName)
+    protected virtual void CheckForValidDataInFirstName(string firstName)
     {
         if (firstName.Length < 2 || firstName.Length > 60)
         {
@@ -139,7 +139,7 @@ public class FileCabinetService
         }
     }
 
-    virtual protected void CheckForValidDataInLastName(string lastName)
+    protected virtual void CheckForValidDataInLastName(string lastName)
     {
         if (lastName.Length < 2 || lastName.Length > 60)
         {
@@ -147,7 +147,7 @@ public class FileCabinetService
         }
     }
 
-    virtual protected void CheckForValidDataInAge(short age)
+    protected virtual void CheckForValidDataInAge(short age)
     {
         if (age < 0 || age > 75)
         {
@@ -155,7 +155,7 @@ public class FileCabinetService
         }
     }
 
-    virtual protected void CheckForValidDataInDateOfBirthday(DateTime dateOfBirth)
+    protected virtual void CheckForValidDataInDateOfBirthday(DateTime dateOfBirth)
     {
         if (dateOfBirth.CompareTo(new DateTime(1950, 1, 1)) < 0 || dateOfBirth.CompareTo(DateTime.Now) > 0)
         {
@@ -163,7 +163,7 @@ public class FileCabinetService
         }
     }
 
-    virtual protected void CheckForValidDataInIncomePerYear(decimal incomePerYear)
+    protected virtual void CheckForValidDataInIncomePerYear(decimal incomePerYear)
     {
         if (incomePerYear < 0)
         {

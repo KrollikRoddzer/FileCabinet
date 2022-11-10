@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using System.Text;
+using CommandLine;
 
 #nullable disable
 
@@ -15,7 +16,7 @@ namespace FileCabinetApp
         private const int CommandHelpIndex = 0;
         private const int DescriptionHelpIndex = 1;
         private const int ExplanationHelpIndex = 2;
-        private static FileCabinetService fileCabinetService = new FileCabinetService();
+        private static FileCabinetService fileCabinetService;
 
         private static bool isRunning = true;
 
@@ -47,39 +48,63 @@ namespace FileCabinetApp
         /// <param name="args"> Parameters of a command line. </param>
         public static void Main(string[] args)
         {
-            Console.WriteLine($"File Cabinet Application, developed by {Program.DeveloperName}");
-            Console.WriteLine(Program.HintMessage);
-            Console.WriteLine();
-
-            do
+            try
             {
-                
+                Console.WriteLine($"File Cabinet Application, developed by {Program.DeveloperName}");
+                Parser.Default
+                    .ParseArguments<Options>(args)
+                    .WithParsed<Options>(o =>
+                    {
+                            if (o.ValidationRules.ToLower() == "default")
+                            {
+                                fileCabinetService = new FileCabinetDeafaultServise();
+                                Console.WriteLine($"Using {o.ValidationRules.ToLower()} validation rules.");
+                            }
+                            else if (o.ValidationRules.ToLower() == "custom")
+                            {
+                                fileCabinetService = new FileCabinetCustomServise();
+                                Console.WriteLine($"Using {o.ValidationRules.ToLower()} validation rules.");
+                            }
+                            else
+                            {
+                                throw new ArgumentException("Unknown undefier for validation-rules.");
+                            }
+                    });
+                Console.WriteLine(Program.HintMessage);
+                Console.WriteLine();
 
-                Console.Write("> ");
-                var line = Console.ReadLine();
-                var inputs = line != null ? line.Split(' ', 2) : new string[] { string.Empty, string.Empty };
-                const int commandIndex = 0;
-                var command = inputs[commandIndex];
+                do
+                {
+                    Console.Write("> ");
+                    var line = Console.ReadLine();
+                    var inputs = line != null ? line.Split(' ', 2) : new string[] { string.Empty, string.Empty };
+                    const int commandIndex = 0;
+                    var command = inputs[commandIndex];
 
-                if (string.IsNullOrEmpty(command))
-                {
-                    Console.WriteLine(Program.HintMessage);
-                    continue;
-                }
+                    if (string.IsNullOrEmpty(command))
+                    {
+                        Console.WriteLine(Program.HintMessage);
+                        continue;
+                    }
 
-                var index = Array.FindIndex(commands, 0, commands.Length, i => i.Item1.Equals(command, StringComparison.InvariantCultureIgnoreCase));
-                if (index >= 0)
-                {
-                    const int parametersIndex = 1;
-                    var parameters = inputs.Length > 1 ? inputs[parametersIndex] : string.Empty;
-                    commands[index].Item2(parameters);
+                    var index = Array.FindIndex(commands, 0, commands.Length, i => i.Item1.Equals(command, StringComparison.InvariantCultureIgnoreCase));
+                    if (index >= 0)
+                    {
+                        const int parametersIndex = 1;
+                        var parameters = inputs.Length > 1 ? inputs[parametersIndex] : string.Empty;
+                        commands[index].Item2(parameters);
+                    }
+                    else
+                    {
+                        PrintMissedCommandInfo(command);
+                    }
                 }
-                else
-                {
-                    PrintMissedCommandInfo(command);
-                }
+                while (isRunning);
             }
-            while (isRunning);
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine("ERROR!!! " + ex.Message);
+            }
         }
 
         private static void PrintMissedCommandInfo(string command)
@@ -313,6 +338,12 @@ namespace FileCabinetApp
             {
                 Console.WriteLine(el);
             }
+        }
+
+        private class Options
+        {
+            [Option(shortName: 'v', longName: "validation-rules", Required = false, HelpText = "Sets validation rules.", Default = "default")]
+            public string ValidationRules { get; set; }
         }
     }
 }

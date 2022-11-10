@@ -1,8 +1,11 @@
-namespace FileCabinetApp;
+﻿namespace FileCabinetApp;
 
 public class FileCabinetCustomServise : FileCabinetService
 {
-    public FileCabinetCustomServise() : base() {}
+    public FileCabinetCustomServise()
+    : base()
+    {
+    }
 
     protected override void ValidateParameters(CreateRecordParameters parameters)
     {
