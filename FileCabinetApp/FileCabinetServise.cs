@@ -50,40 +50,7 @@ public class FileCabinetService
     /// <returns> Id of record. </returns>
     public int CreateRecord(CreateRecordParameters parameters)
     {
-        if (parameters.FirstName is null)
-        {
-            throw new ArgumentNullException(nameof(parameters.FirstName), "First name should be from 2 to 60 letters length.");
-        }
-
-        if (parameters.FirstName.Length < 2 || parameters.FirstName.Length > 60)
-        {
-            throw new ArgumentException("First name should be from 2 to 60 letters length.", nameof(parameters.FirstName));
-        }
-
-        if (parameters.LastName is null)
-        {
-            throw new ArgumentNullException(nameof(parameters.LastName), "First name should be from 2 to 60 letters length.");
-        }
-
-        if (parameters.LastName.Length < 2 || parameters.LastName.Length > 60)
-        {
-            throw new ArgumentException("First name should be from 2 to 60 letters length.", nameof(parameters.LastName));
-        }
-
-        if (parameters.Age < 0 || parameters.Age > 75)
-        {
-            throw new ArgumentException("parameters.Age shout be an integer number from 0 to 75.", nameof(parameters.Age));
-        }
-
-        if (parameters.DateOfBirth.CompareTo(new DateTime(1950, 1, 1)) < 0 || parameters.DateOfBirth.CompareTo(DateTime.Now) > 0)
-        {
-            throw new ArgumentException($"Date of birth must be from {new DateTime(1950, 1, 1).ToString("yyyy-MMM-dd", CultureInfo.CreateSpecificCulture("en-US"))} to {DateTime.Now.ToString("yyyy-MMM-dd", CultureInfo.CreateSpecificCulture("en-US"))}.");
-        }
-
-        if (parameters.IncomePerYear < 0)
-        {
-            throw new ArgumentException("Income must be a real number greater than zero.");
-        }
+        this.ValidateParameters(parameters);
 
         var record = new FileCabinetRecord
         {
@@ -106,40 +73,7 @@ public class FileCabinetService
     /// <param name="parameters"> Class used for parametes of this method. </param>
     public void EditRecord(EditRecordParameters parameters)
     {
-        if (parameters.FirstName is null)
-        {
-            throw new ArgumentNullException(nameof(parameters.FirstName), "First name should be from 2 to 60 letters length.");
-        }
-
-        if (parameters.FirstName.Length < 2 || parameters.FirstName.Length > 60)
-        {
-            throw new ArgumentException("First name should be from 2 to 60 letters length.", nameof(parameters.FirstName));
-        }
-
-        if (parameters.LastName is null)
-        {
-            throw new ArgumentNullException(nameof(parameters.LastName), "First name should be from 2 to 60 letters length.");
-        }
-
-        if (parameters.LastName.Length < 2 || parameters.LastName.Length > 60)
-        {
-            throw new ArgumentException("First name should be from 2 to 60 letters length.", nameof(parameters.LastName));
-        }
-
-        if (parameters.Age < 0 || parameters.Age > 75)
-        {
-            throw new ArgumentException("parameters.Age shout be an integer number from 0 to 75.", nameof(parameters.Age));
-        }
-
-        if (parameters.DateOfBirth.CompareTo(new DateTime(1950, 1, 1)) < 0 || parameters.DateOfBirth.CompareTo(DateTime.Now) > 0)
-        {
-            throw new ArgumentException($"Date of birth must be from {new DateTime(1950, 1, 1).ToString("yyyy-MMM-dd", CultureInfo.CreateSpecificCulture("en-US"))} to {DateTime.Now.ToString("yyyy-MMM-dd", CultureInfo.CreateSpecificCulture("en-US"))}.");
-        }
-
-        if (parameters.IncomePerYear < 0)
-        {
-            throw new ArgumentException("Income must be a real number greater than zero.");
-        }
+        this.ValidateParameters(parameters);
 
         this.list[parameters.Id - 1] = new FileCabinetRecord
         {
@@ -168,5 +102,72 @@ public class FileCabinetService
     public int GetStat()
     {
         return this.list.Count;
+    }
+
+    virtual protected void ValidateParameters(CreateRecordParameters parameters)
+    {
+        this.CheckForNullInFirstName(parameters.FirstName);
+        this.CheckForValidDataInFirstName(parameters.FirstName);
+        this.CheckForNullInLastName(parameters.LastName);
+        this.CheckForValidDataInLastName(parameters.LastName);
+        this.CheckForValidDataInAge(parameters.Age);
+        this.CheckForValidDataInDateOfBirthday(parameters.DateOfBirth);
+        this.CheckForValidDataInIncomePerYear(parameters.IncomePerYear);
+    }
+
+    protected void CheckForNullInFirstName(string firstName)
+    {
+        if (firstName is null)
+        {
+            throw new ArgumentNullException(nameof(firstName), "First name should be from 2 to 60 letters length.");
+        }
+    }
+
+    virtual protected void CheckForValidDataInFirstName(string firstName)
+    {
+        if (firstName.Length < 2 || firstName.Length > 60)
+        {
+            throw new ArgumentException("First name should be from 2 to 60 letters length.", nameof(firstName));
+        }
+    }
+
+    protected void CheckForNullInLastName(string lastName)
+    {
+        if (lastName is null)
+        {
+            throw new ArgumentNullException(nameof(lastName), "First name should be from 2 to 60 letters length.");
+        }
+    }
+
+    virtual protected void CheckForValidDataInLastName(string lastName)
+    {
+        if (lastName.Length < 2 || lastName.Length > 60)
+        {
+            throw new ArgumentException("First name should be from 2 to 60 letters length.", nameof(lastName));
+        }
+    }
+
+    virtual protected void CheckForValidDataInAge(short age)
+    {
+        if (age < 0 || age > 75)
+        {
+            throw new ArgumentException("Age shout be an integer number from 0 to 75.", nameof(age));
+        }
+    }
+
+    virtual protected void CheckForValidDataInDateOfBirthday(DateTime dateOfBirth)
+    {
+        if (dateOfBirth.CompareTo(new DateTime(1950, 1, 1)) < 0 || dateOfBirth.CompareTo(DateTime.Now) > 0)
+        {
+            throw new ArgumentException($"Date of birth must be from {new DateTime(1950, 1, 1).ToString("yyyy-MMM-dd", CultureInfo.CreateSpecificCulture("en-US"))} to {DateTime.Now.ToString("yyyy-MMM-dd", CultureInfo.CreateSpecificCulture("en-US"))}.");
+        }
+    }
+
+    virtual protected void CheckForValidDataInIncomePerYear(decimal incomePerYear)
+    {
+        if (incomePerYear < 0)
+        {
+            throw new ArgumentException("Income must be a real number greater than zero.");
+        }
     }
 }

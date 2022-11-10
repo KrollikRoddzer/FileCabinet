@@ -53,6 +53,8 @@ namespace FileCabinetApp
 
             do
             {
+                
+
                 Console.Write("> ");
                 var line = Console.ReadLine();
                 var inputs = line != null ? line.Split(' ', 2) : new string[] { string.Empty, string.Empty };
@@ -156,9 +158,17 @@ namespace FileCabinetApp
                     Console.WriteLine(e.Message);
                     Console.WriteLine("Try again:");
                 }
-                catch (FormatException)
+                catch (FormatException e)
                 {
-                    Console.WriteLine("Valid Date of Birth format is mm/dd/yyyy.");
+                    if (e.GetType().ToString() == "short")
+                    {
+                        Console.WriteLine("Inccorent age.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Valid Date of Birth format is mm/dd/yyyy.");
+                    }
+
                     Console.WriteLine("Try again:");
                 }
             }
