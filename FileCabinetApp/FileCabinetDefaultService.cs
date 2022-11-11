@@ -12,4 +12,10 @@ public class FileCabinetDeafaultServise : FileCabinetService
     : base()
     {
     }
+
+    /// <inheritdoc/>
+    public override IRecordValidator<CreateRecordParameters> CreateValidator()
+    {
+        return new DefaultValidator();
+    }
 }

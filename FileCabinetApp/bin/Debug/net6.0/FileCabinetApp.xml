@@ -4,6 +4,106 @@
         <name>FileCabinetApp</name>
     </assembly>
     <members>
+        <member name="T:FileCabinetApp.CustomValidator">
+            <summary>
+            Custom validation rules class.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.CustomValidator.ValidateParameters(FileCabinetApp.CreateRecordParameters)">
+            <summary>
+            Validation method with default rules.
+            </summary>
+            <param name="parameters"> Parameter for creating record. </param>
+        </member>
+        <member name="M:FileCabinetApp.CustomValidator.CheckForNullInFirstName(System.String)">
+            <summary>
+            Checks first name parameter for null.
+            </summary>
+            <param name="firstName"> First name parameter. </param>
+        </member>
+        <member name="M:FileCabinetApp.CustomValidator.CheckForValidDataInFirstName(System.String)">
+            <summary>
+            Checks first name parameter for valid data.
+            </summary>
+            <param name="firstName"> First name parameter. </param>
+        </member>
+        <member name="M:FileCabinetApp.CustomValidator.CheckForNullInLastName(System.String)">
+            <summary>
+            Checks last name parameter for null.
+            </summary>
+            <param name="lastName"> Last name parameter. </param>
+        </member>
+        <member name="M:FileCabinetApp.CustomValidator.CheckForValidDataInLastName(System.String)">
+            <summary>
+            Checks last name parameter for valid data.
+            </summary>
+            <param name="lastName"> Last name parameter. </param>
+        </member>
+        <member name="M:FileCabinetApp.CustomValidator.CheckForValidDataInAge(System.Int16)">
+            <summary>
+            Checks age parameter for valid data.
+            </summary>
+            <param name="age"> Age parameter. </param>
+        </member>
+        <member name="M:FileCabinetApp.CustomValidator.CheckForValidDataInIncomePerYear(System.Decimal)">
+            <summary>
+            Checks income parameter for valid data.
+            </summary>
+            <param name="incomePerYear"> Income parameter. </param>
+        </member>
+        <member name="T:FileCabinetApp.DefaultValidator">
+            <summary>
+            Default validation rules class.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.DefaultValidator.ValidateParameters(FileCabinetApp.CreateRecordParameters)">
+            <summary>
+            Validation method with default rules.
+            </summary>
+            <param name="parameters"> Parameter for creating record. </param>
+        </member>
+        <member name="M:FileCabinetApp.DefaultValidator.CheckForNullInFirstName(System.String)">
+            <summary>
+            Checks first name parameter for null.
+            </summary>
+            <param name="firstName"> First name parameter. </param>
+        </member>
+        <member name="M:FileCabinetApp.DefaultValidator.CheckForValidDataInFirstName(System.String)">
+            <summary>
+            Checks first name parameter for valid data.
+            </summary>
+            <param name="firstName"> First name parameter. </param>
+        </member>
+        <member name="M:FileCabinetApp.DefaultValidator.CheckForNullInLastName(System.String)">
+            <summary>
+            Checks last name parameter for null.
+            </summary>
+            <param name="lastName"> Last name parameter. </param>
+        </member>
+        <member name="M:FileCabinetApp.DefaultValidator.CheckForValidDataInLastName(System.String)">
+            <summary>
+            Checks last name parameter for valid data.
+            </summary>
+            <param name="lastName"> Last name parameter. </param>
+        </member>
+        <member name="M:FileCabinetApp.DefaultValidator.CheckForValidDataInAge(System.Int16)">
+            <summary>
+            Checks age parameter for valid data.
+            </summary>
+            <param name="age"> Age parameter. </param>
+        </member>
+        <member name="M:FileCabinetApp.DefaultValidator.CheckForValidDataInDateOfBirthday(System.DateTime)">
+            <summary>
+            Checks birthday parameter for valid data.
+            </summary>
+            <param name="dateOfBirth"> Birthday parameter. </param>
+        </member>
+        <member name="M:FileCabinetApp.DefaultValidator.CheckForValidDataInIncomePerYear(System.Decimal)">
+            <summary>
+            Checks income parameter for valid data.
+            </summary>
+            <param name="incomePerYear"> Income parameter. </param>
+        </member>
         <member name="T:FileCabinetApp.EFindCriteria">
             <summary>
             Criteria used in Find meethod in FileCabinetSetvise.
@@ -49,29 +149,8 @@
             Initializes a new instance of the <see cref="T:FileCabinetApp.FileCabinetCustomServise"/> class.
             </summary>
         </member>
-        <member name="M:FileCabinetApp.FileCabinetCustomServise.ValidateParameters(FileCabinetApp.CreateRecordParameters)">
-            <summary>
-            Validation method with custom rules.
-            </summary>
-            <param name="parameters"> Parameter for creating record. </param>
-        </member>
-        <member name="M:FileCabinetApp.FileCabinetCustomServise.CheckForValidDataInFirstName(System.String)">
-            <summary>
-            Checks first name parameter for valid data.
-            </summary>
-            <param name="firstName"> First name parameter. </param>
-        </member>
-        <member name="M:FileCabinetApp.FileCabinetCustomServise.CheckForValidDataInLastName(System.String)">
-            <summary>
-            Checks last name parameter for valid data.
-            </summary>
-            <param name="lastName"> Last name parameter. </param>
-        </member>
-        <member name="M:FileCabinetApp.FileCabinetCustomServise.CheckForValidDataInAge(System.Int16)">
-            <summary>
-            Checks age parameter for valid data.
-            </summary>
-            <param name="age"> Age parameter. </param>
+        <member name="M:FileCabinetApp.FileCabinetCustomServise.CreateValidator">
+            <inheritdoc/>
         </member>
         <member name="T:FileCabinetApp.FileCabinetDeafaultServise">
             <summary>
@@ -82,6 +161,9 @@
             <summary>
             Initializes a new instance of the <see cref="T:FileCabinetApp.FileCabinetDeafaultServise"/> class.
             </summary>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetDeafaultServise.CreateValidator">
+            <inheritdoc/>
         </member>
         <member name="T:FileCabinetApp.FileCabinetRecord">
             <summary>
@@ -170,53 +252,23 @@
             </summary>
             <returns> Returns number of records. </returns>
         </member>
-        <member name="M:FileCabinetApp.FileCabinetService.ValidateParameters(FileCabinetApp.CreateRecordParameters)">
+        <member name="M:FileCabinetApp.FileCabinetService.CreateValidator">
             <summary>
-            Validation method with default rules.
+            Creates an instance of class that implements IRecordValidator.
             </summary>
-            <param name="parameters"> Parameter for creating record. </param>
+            <returns> Returns an instance of class that implements IRecordValidator. </returns>
         </member>
-        <member name="M:FileCabinetApp.FileCabinetService.CheckForNullInFirstName(System.String)">
+        <member name="T:FileCabinetApp.IRecordValidator`1">
             <summary>
-            Checks first name parameter for null.
+            Inerface for realisation parameter validation.
             </summary>
-            <param name="firstName"> First name parameter. </param>
+            <typeparam name="TValue"> The type of parameters in ValidateParameters method. </typeparam>
         </member>
-        <member name="M:FileCabinetApp.FileCabinetService.CheckForValidDataInFirstName(System.String)">
+        <member name="M:FileCabinetApp.IRecordValidator`1.ValidateParameters(`0)">
             <summary>
-            Checks first name parameter for valid data.
+            Validates parameters.
             </summary>
-            <param name="firstName"> First name parameter. </param>
-        </member>
-        <member name="M:FileCabinetApp.FileCabinetService.CheckForNullInLastName(System.String)">
-            <summary>
-            Checks last name parameter for null.
-            </summary>
-            <param name="lastName"> Last name parameter. </param>
-        </member>
-        <member name="M:FileCabinetApp.FileCabinetService.CheckForValidDataInLastName(System.String)">
-            <summary>
-            Checks last name parameter for valid data.
-            </summary>
-            <param name="lastName"> Last name parameter. </param>
-        </member>
-        <member name="M:FileCabinetApp.FileCabinetService.CheckForValidDataInAge(System.Int16)">
-            <summary>
-            Checks age parameter for valid data.
-            </summary>
-            <param name="age"> Age parameter. </param>
-        </member>
-        <member name="M:FileCabinetApp.FileCabinetService.CheckForValidDataInDateOfBirthday(System.DateTime)">
-            <summary>
-            Checks birthday parameter for valid data.
-            </summary>
-            <param name="dateOfBirth"> Birthday parameter. </param>
-        </member>
-        <member name="M:FileCabinetApp.FileCabinetService.CheckForValidDataInIncomePerYear(System.Decimal)">
-            <summary>
-            Checks income parameter for valid data.
-            </summary>
-            <param name="incomePerYear"> Income parameter. </param>
+            <param name="parameters"> Parameters to validate. </param>
         </member>
         <member name="T:FileCabinetApp.CreateRecordParameters">
             <summary>
