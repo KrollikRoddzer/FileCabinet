@@ -139,26 +139,6 @@
             Searching by id.
             </summary>
         </member>
-        <member name="T:FileCabinetApp.FileCabinetCustomServise">
-            <summary>
-            Class that holds every command in application with custom validation.
-            </summary>
-        </member>
-        <member name="M:FileCabinetApp.FileCabinetCustomServise.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:FileCabinetApp.FileCabinetCustomServise"/> class.
-            </summary>
-        </member>
-        <member name="T:FileCabinetApp.FileCabinetDeafaultServise">
-            <summary>
-            Class that holds every command in application with default validation.
-            </summary>
-        </member>
-        <member name="M:FileCabinetApp.FileCabinetDeafaultServise.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:FileCabinetApp.FileCabinetDeafaultServise"/> class.
-            </summary>
-        </member>
         <member name="T:FileCabinetApp.FileCabinetRecord">
             <summary>
             Class for creating records in FileCabinetServise.

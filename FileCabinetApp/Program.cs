@@ -57,12 +57,12 @@ namespace FileCabinetApp
                     {
                             if (o.ValidationRules.ToLower() == "default")
                             {
-                                fileCabinetService = new FileCabinetDeafaultServise();
+                                fileCabinetService = new FileCabinetService(new DefaultValidator());
                                 Console.WriteLine($"Using {o.ValidationRules.ToLower()} validation rules.");
                             }
                             else if (o.ValidationRules.ToLower() == "custom")
                             {
-                                fileCabinetService = new FileCabinetCustomServise();
+                                fileCabinetService = new FileCabinetService(new CustomValidator());
                                 Console.WriteLine($"Using {o.ValidationRules.ToLower()} validation rules.");
                             }
                             else
