@@ -9,12 +9,26 @@ namespace FileCabinetApp;
 /// <summary>
 /// Class that holds every command in application.
 /// </summary>
-public abstract class FileCabinetService
+public class FileCabinetService
 {
     /// <summary>
     /// List that holds every record.
     /// </summary>
     private readonly List<FileCabinetRecord> list = new List<FileCabinetRecord>();
+
+    /// <summary>
+    /// Validator field that validates parameters in methods.
+    /// </summary>
+    private readonly IRecordValidator<CreateRecordParameters> validator;
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="FileCabinetService"/> class.
+    /// </summary>
+    /// <param name="validator"> Validator for parameters. </param>
+    public FileCabinetService(IRecordValidator<CreateRecordParameters> validator)
+    {
+        this.validator = validator;
+    }
 
     /// <summary>
     /// Finds records in list accoarding to criteria.
@@ -50,7 +64,7 @@ public abstract class FileCabinetService
     /// <returns> Id of record. </returns>
     public int CreateRecord(CreateRecordParameters parameters)
     {
-        this.CreateValidator().ValidateParameters(parameters);
+        this.validator.ValidateParameters(parameters);
 
         var record = new FileCabinetRecord
         {
@@ -73,7 +87,7 @@ public abstract class FileCabinetService
     /// <param name="parameters"> Class used for parametes of this method. </param>
     public void EditRecord(EditRecordParameters parameters)
     {
-        this.CreateValidator().ValidateParameters(parameters);
+        this.validator.ValidateParameters(parameters);
 
         this.list[parameters.Id - 1] = new FileCabinetRecord
         {
@@ -103,10 +117,4 @@ public abstract class FileCabinetService
     {
         return this.list.Count;
     }
-
-    /// <summary>
-    /// Creates an instance of class that implements IRecordValidator.
-    /// </summary>
-    /// <returns> Returns an instance of class that implements IRecordValidator. </returns>
-    public abstract IRecordValidator<CreateRecordParameters> CreateValidator();
 }

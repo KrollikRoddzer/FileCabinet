@@ -9,13 +9,7 @@ public class FileCabinetCustomServise : FileCabinetService
     /// Initializes a new instance of the <see cref="FileCabinetCustomServise"/> class.
     /// </summary>
     public FileCabinetCustomServise()
-    : base()
+    : base(new CustomValidator())
     {
-    }
-
-    /// <inheritdoc/>
-    public override IRecordValidator<CreateRecordParameters> CreateValidator()
-    {
-        return new CustomValidator();
     }
 }

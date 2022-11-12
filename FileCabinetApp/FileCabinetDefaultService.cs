@@ -9,13 +9,7 @@ public class FileCabinetDeafaultServise : FileCabinetService
     /// Initializes a new instance of the <see cref="FileCabinetDeafaultServise"/> class.
     /// </summary>
     public FileCabinetDeafaultServise()
-    : base()
+    : base(new DefaultValidator())
     {
-    }
-
-    /// <inheritdoc/>
-    public override IRecordValidator<CreateRecordParameters> CreateValidator()
-    {
-        return new DefaultValidator();
     }
 }

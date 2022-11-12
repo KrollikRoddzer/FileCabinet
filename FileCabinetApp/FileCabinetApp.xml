@@ -149,9 +149,6 @@
             Initializes a new instance of the <see cref="T:FileCabinetApp.FileCabinetCustomServise"/> class.
             </summary>
         </member>
-        <member name="M:FileCabinetApp.FileCabinetCustomServise.CreateValidator">
-            <inheritdoc/>
-        </member>
         <member name="T:FileCabinetApp.FileCabinetDeafaultServise">
             <summary>
             Class that holds every command in application with default validation.
@@ -161,9 +158,6 @@
             <summary>
             Initializes a new instance of the <see cref="T:FileCabinetApp.FileCabinetDeafaultServise"/> class.
             </summary>
-        </member>
-        <member name="M:FileCabinetApp.FileCabinetDeafaultServise.CreateValidator">
-            <inheritdoc/>
         </member>
         <member name="T:FileCabinetApp.FileCabinetRecord">
             <summary>
@@ -219,6 +213,17 @@
             List that holds every record.
             </summary>
         </member>
+        <member name="F:FileCabinetApp.FileCabinetService.validator">
+            <summary>
+            Validator field that validates parameters in methods.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetService.#ctor(FileCabinetApp.IRecordValidator{FileCabinetApp.CreateRecordParameters})">
+            <summary>
+            Initializes a new instance of the <see cref="T:FileCabinetApp.FileCabinetService"/> class.
+            </summary>
+            <param name="validator"> Validator for parameters. </param>
+        </member>
         <member name="M:FileCabinetApp.FileCabinetService.Find(FileCabinetApp.EFindCriteria,System.String)">
             <summary>
             Finds records in list accoarding to criteria.
@@ -251,12 +256,6 @@
             Returns stat of list.
             </summary>
             <returns> Returns number of records. </returns>
-        </member>
-        <member name="M:FileCabinetApp.FileCabinetService.CreateValidator">
-            <summary>
-            Creates an instance of class that implements IRecordValidator.
-            </summary>
-            <returns> Returns an instance of class that implements IRecordValidator. </returns>
         </member>
         <member name="T:FileCabinetApp.IRecordValidator`1">
             <summary>
