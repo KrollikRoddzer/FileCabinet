@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 
@@ -36,22 +37,22 @@ public class FileCabinetService
     /// <param name="criteria"> Criteria according to is searched record. </param>
     /// <param name="parameter"> Parameter we use to compare records. </param>
     /// <returns> Returns array of found records. </returns>
-    public FileCabinetRecord[] Find(EFindCriteria criteria, string parameter)
+    public ReadOnlyCollection<FileCabinetRecord> Find(EFindCriteria criteria, string parameter)
     {
         switch (criteria)
         {
             case EFindCriteria.FirstName:
-                return this.list.Where((record) => record.FirstName.ToLower().Equals(parameter)).ToArray();
+                return new ReadOnlyCollection<FileCabinetRecord>(this.list.Where((record) => record.FirstName.ToLower().Equals(parameter)).ToList());
             case EFindCriteria.LastName:
-                return this.list.Where(record => record.LastName.ToLower().Equals(parameter)).ToArray();
+                return new ReadOnlyCollection<FileCabinetRecord>(this.list.Where(record => record.LastName.ToLower().Equals(parameter)).ToList());
             case EFindCriteria.Age:
-                return this.list.Where(record => record.Age.Equals(Convert.ToInt16(parameter))).ToArray();
+                return new ReadOnlyCollection<FileCabinetRecord>(this.list.Where(record => record.Age.Equals(Convert.ToInt16(parameter))).ToList());
             case EFindCriteria.DataOfBirth:
-                return this.list.Where(record => record.DateOfBirth.Equals(DateTime.Parse(parameter, CultureInfo.CreateSpecificCulture("en-US")))).ToArray();
+                return new ReadOnlyCollection<FileCabinetRecord>(this.list.Where(record => record.DateOfBirth.Equals(DateTime.Parse(parameter, CultureInfo.CreateSpecificCulture("en-US")))).ToList());
             case EFindCriteria.IncomePerYear:
-                return this.list.Where(record => record.IncomePerYear.Equals(Convert.ToDecimal(parameter))).ToArray();
+                return new ReadOnlyCollection<FileCabinetRecord>(this.list.Where(record => record.IncomePerYear.Equals(Convert.ToDecimal(parameter))).ToList());
             case EFindCriteria.Id:
-                return this.list.Where(record => record.Id.Equals(Convert.ToInt32(parameter))).ToArray();
+                return new ReadOnlyCollection<FileCabinetRecord>(this.list.Where(record => record.Id.Equals(Convert.ToInt32(parameter))).ToList());
             default:
                 throw new ArgumentException("Something wrong with the criteria.");
         }
@@ -104,9 +105,9 @@ public class FileCabinetService
     /// Method that return array of records.
     /// </summary>
     /// <returns> Returns recods array. </returns>
-    public FileCabinetRecord[] GetRecords()
+    public ReadOnlyCollection<FileCabinetRecord> GetRecords()
     {
-        return this.list.ToArray();
+        return new ReadOnlyCollection<FileCabinetRecord>(this.list);
     }
 
     /// <summary>
