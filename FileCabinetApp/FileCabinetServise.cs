@@ -10,7 +10,7 @@ namespace FileCabinetApp;
 /// <summary>
 /// Class that holds every command in application.
 /// </summary>
-public class FileCabinetService
+public class FileCabinetService : IFileCabinetServise<FileCabinetRecord>
 {
     /// <summary>
     /// List that holds every record.
@@ -101,19 +101,13 @@ public class FileCabinetService
         };
     }
 
-    /// <summary>
-    /// Method that return array of records.
-    /// </summary>
-    /// <returns> Returns recods array. </returns>
+    /// <inheritdoc/>
     public ReadOnlyCollection<FileCabinetRecord> GetRecords()
     {
         return new ReadOnlyCollection<FileCabinetRecord>(this.list);
     }
 
-    /// <summary>
-    /// Returns stat of list.
-    /// </summary>
-    /// <returns> Returns number of records. </returns>
+    /// <inheritdoc/>
     public int GetStat()
     {
         return this.list.Count;

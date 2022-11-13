@@ -226,12 +226,24 @@
             <param name="parameters"> Class used for parametes of this method. </param>
         </member>
         <member name="M:FileCabinetApp.FileCabinetService.GetRecords">
+            <inheritdoc/>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetService.GetStat">
+            <inheritdoc/>
+        </member>
+        <member name="T:FileCabinetApp.IFileCabinetServise`1">
+            <summary>
+            Interface for realisation FileCabietServises.
+            </summary>
+            <typeparam name="TValue"> Value that stores in file cabinet servise. </typeparam>
+        </member>
+        <member name="M:FileCabinetApp.IFileCabinetServise`1.GetRecords">
             <summary>
             Method that return array of records.
             </summary>
             <returns> Returns recods array. </returns>
         </member>
-        <member name="M:FileCabinetApp.FileCabinetService.GetStat">
+        <member name="M:FileCabinetApp.IFileCabinetServise`1.GetStat">
             <summary>
             Returns stat of list.
             </summary>
