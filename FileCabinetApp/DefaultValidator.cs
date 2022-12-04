@@ -7,66 +7,118 @@ namespace FileCabinetApp;
 /// </summary>
 public class DefaultValidator : IRecordValidator<CreateRecordParameters>
 {
+    /// <inheritdoc/>
+    public Tuple<bool, string> ValidateFirstName(string value)
+    {
+        try
+        {
+            this.CheckFirstName(value);
+            return new Tuple<bool, string>(true, string.Empty);
+        }
+        catch (Exception ex)
+        {
+            return new Tuple<bool, string>(false, ex.Message);
+        }
+    }
+
+    /// <inheritdoc/>
+    public Tuple<bool, string> ValidateLastName(string value)
+    {
+        try
+        {
+            this.CheckLastName(value);
+            return new Tuple<bool, string>(true, string.Empty);
+        }
+        catch (Exception ex)
+        {
+            return new Tuple<bool, string>(false, ex.Message);
+        }
+    }
+
+    /// <inheritdoc/>
+    public Tuple<bool, string> ValidateAge(short value)
+    {
+        try
+        {
+            this.CheckAge(value);
+            return new Tuple<bool, string>(true, string.Empty);
+        }
+        catch (Exception ex)
+        {
+            return new Tuple<bool, string>(false, ex.Message);
+        }
+    }
+
+    /// <inheritdoc/>
+    public Tuple<bool, string> ValidateDate(DateTime value)
+    {
+        try
+        {
+            this.CheckDate(value);
+            return new Tuple<bool, string>(true, string.Empty);
+        }
+        catch (Exception ex)
+        {
+            return new Tuple<bool, string>(false, ex.Message);
+        }
+    }
+
+    /// <inheritdoc/>
+    public Tuple<bool, string> ValidateIncome(decimal value)
+    {
+        try
+        {
+            this.CheckIncome(value);
+            return new Tuple<bool, string>(true, string.Empty);
+        }
+        catch (Exception ex)
+        {
+            return new Tuple<bool, string>(false, ex.Message);
+        }
+    }
+
     /// <summary>
     /// Validation method with default rules.
     /// </summary>
     /// <param name="parameters"> Parameter for creating record. </param>
     public void ValidateParameters(CreateRecordParameters parameters)
     {
-        this.CheckForNullInFirstName(parameters.FirstName);
-        this.CheckForValidDataInFirstName(parameters.FirstName);
-        this.CheckForNullInLastName(parameters.LastName);
-        this.CheckForValidDataInLastName(parameters.LastName);
-        this.CheckForValidDataInAge(parameters.Age);
-        this.CheckForValidDataInDateOfBirthday(parameters.DateOfBirth);
-        this.CheckForValidDataInIncomePerYear(parameters.IncomePerYear);
+        this.CheckFirstName(parameters.FirstName);
+        this.CheckLastName(parameters.LastName);
+        this.CheckAge(parameters.Age);
+        this.CheckDate(parameters.DateOfBirth);
+        this.CheckIncome(parameters.IncomePerYear);
     }
 
     /// <summary>
-    /// Checks first name parameter for null.
+    /// Checks FirstName parameter to be suitable.
     /// </summary>
     /// <param name="firstName"> First name parameter. </param>
-    private void CheckForNullInFirstName(string firstName)
+    private void CheckFirstName(string? firstName)
     {
         if (firstName is null)
         {
             throw new ArgumentNullException(nameof(firstName), "First name should be from 2 to 60 letters length.");
         }
-    }
-
-    /// <summary>
-    /// Checks first name parameter for valid data.
-    /// </summary>
-    /// <param name="firstName"> First name parameter. </param>
-    private void CheckForValidDataInFirstName(string firstName)
-    {
-        if (firstName.Length < 2 || firstName.Length > 60)
+        else if (firstName.Length < 2 || firstName.Length > 60)
         {
             throw new ArgumentException("First name should be from 2 to 60 letters length.", nameof(firstName));
         }
     }
 
     /// <summary>
-    /// Checks last name parameter for null.
+    /// Checks LastName parameter to be suitable.
     /// </summary>
     /// <param name="lastName"> Last name parameter. </param>
-    private void CheckForNullInLastName(string lastName)
+    private void CheckLastName(string? lastName)
     {
         if (lastName is null)
         {
-            throw new ArgumentNullException(nameof(lastName), "First name should be from 2 to 60 letters length.");
+            throw new ArgumentNullException(nameof(lastName), "Last name should be from 2 to 60 letters length.");
         }
-    }
-
-    /// <summary>
-    /// Checks last name parameter for valid data.
-    /// </summary>
-    /// <param name="lastName"> Last name parameter. </param>
-    private void CheckForValidDataInLastName(string lastName)
-    {
-        if (lastName.Length < 2 || lastName.Length > 60)
+        else if (lastName.Length < 2 || lastName.Length > 60)
         {
-            throw new ArgumentException("First name should be from 2 to 60 letters length.", nameof(lastName));
+            throw new ArgumentException("Last name should be from 2 to 60 letters length.", nameof(lastName));
         }
     }
 
@@ -74,7 +126,7 @@ public class DefaultValidator : IRecordValidator<CreateRecordParameters>
     /// Checks age parameter for valid data.
     /// </summary>
     /// <param name="age"> Age parameter. </param>
-    private void CheckForValidDataInAge(short age)
+    private void CheckAge(short age)
     {
         if (age < 0 || age > 75)
         {
@@ -86,7 +138,7 @@ public class DefaultValidator : IRecordValidator<CreateRecordParameters>
     /// Checks birthday parameter for valid data.
     /// </summary>
     /// <param name="dateOfBirth"> Birthday parameter. </param>
-    private void CheckForValidDataInDateOfBirthday(DateTime dateOfBirth)
+    private void CheckDate(DateTime dateOfBirth)
     {
         if (dateOfBirth.CompareTo(new DateTime(1950, 1, 1)) < 0 || dateOfBirth.CompareTo(DateTime.Now) > 0)
         {
@@ -98,7 +150,7 @@ public class DefaultValidator : IRecordValidator<CreateRecordParameters>
     /// Checks income parameter for valid data.
     /// </summary>
     /// <param name="incomePerYear"> Income parameter. </param>
-    private void CheckForValidDataInIncomePerYear(decimal incomePerYear)
+    private void CheckIncome(decimal incomePerYear)
     {
         if (incomePerYear < 0)
         {

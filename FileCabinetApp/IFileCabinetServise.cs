@@ -19,4 +19,10 @@ public interface IFileCabinetServise<TValue>
     /// </summary>
     /// <returns> Returns number of records. </returns>
     public int GetStat();
+
+    /// <summary>
+    /// Returns sertain validator.
+    /// </summary>
+    /// <returns> Returns sertaion record validator. </returns>
+    public IRecordValidator<CreateRecordParameters> GetRecordValidator();
 }

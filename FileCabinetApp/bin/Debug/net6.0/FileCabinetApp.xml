@@ -4,10 +4,74 @@
         <name>FileCabinetApp</name>
     </assembly>
     <members>
+        <member name="T:FileCabinetApp.Converter">
+            <summary>
+            Class for converting input to record parameters.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.Converter.ConvertFirstNameAndLastName(System.String)">
+            <summary>
+            Method for converting data.
+            </summary>
+            <param name="value"> Value to convert. </param>
+            <returns>
+            Returns a tuple that contains bool value: true if converted otherwise false.
+            String value contains message.
+            String value contains converted value.
+            </returns>
+        </member>
+        <member name="M:FileCabinetApp.Converter.ConvertAge(System.String)">
+            <summary>
+            Method for converting data.
+            </summary>
+            <param name="value"> Value to convert. </param>
+            <returns>
+            Returns a tuple that contains bool value: true if converted otherwise false.
+            String value contains message.
+            Short value contains converted value.
+            </returns>
+        </member>
+        <member name="M:FileCabinetApp.Converter.ConvertDate(System.String)">
+            <summary>
+            Method for converting data.
+            </summary>
+            <param name="value"> Value to convert. </param>
+            <returns>
+            Returns a tuple that contains bool value: true if converted otherwise false.
+            String value contains message.
+            DateTime value contains converted value.
+            </returns>
+        </member>
+        <member name="M:FileCabinetApp.Converter.ConvertIncome(System.String)">
+            <summary>
+            Method for converting data.
+            </summary>
+            <param name="value"> Value to convert. </param>
+            <returns>
+            Returns a tuple that contains bool value: true if converted otherwise false.
+            String value contains message.
+            Decimal value contains converted value.
+            </returns>
+        </member>
         <member name="T:FileCabinetApp.CustomValidator">
             <summary>
             Custom validation rules class.
             </summary>
+        </member>
+        <member name="M:FileCabinetApp.CustomValidator.ValidateFirstName(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:FileCabinetApp.CustomValidator.ValidateLastName(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:FileCabinetApp.CustomValidator.ValidateAge(System.Int16)">
+            <inheritdoc/>
+        </member>
+        <member name="M:FileCabinetApp.CustomValidator.ValidateDate(System.DateTime)">
+            <inheritdoc/>
+        </member>
+        <member name="M:FileCabinetApp.CustomValidator.ValidateIncome(System.Decimal)">
+            <inheritdoc/>
         </member>
         <member name="M:FileCabinetApp.CustomValidator.ValidateParameters(FileCabinetApp.CreateRecordParameters)">
             <summary>
@@ -15,37 +79,25 @@
             </summary>
             <param name="parameters"> Parameter for creating record. </param>
         </member>
-        <member name="M:FileCabinetApp.CustomValidator.CheckForNullInFirstName(System.String)">
+        <member name="M:FileCabinetApp.CustomValidator.CheckFirstName(System.String)">
             <summary>
-            Checks first name parameter for null.
+            Checks FirstName parameter to be suitable.
             </summary>
             <param name="firstName"> First name parameter. </param>
         </member>
-        <member name="M:FileCabinetApp.CustomValidator.CheckForValidDataInFirstName(System.String)">
-            <summary>
-            Checks first name parameter for valid data.
-            </summary>
-            <param name="firstName"> First name parameter. </param>
-        </member>
-        <member name="M:FileCabinetApp.CustomValidator.CheckForNullInLastName(System.String)">
+        <member name="M:FileCabinetApp.CustomValidator.CheckLastName(System.String)">
             <summary>
             Checks last name parameter for null.
             </summary>
             <param name="lastName"> Last name parameter. </param>
         </member>
-        <member name="M:FileCabinetApp.CustomValidator.CheckForValidDataInLastName(System.String)">
-            <summary>
-            Checks last name parameter for valid data.
-            </summary>
-            <param name="lastName"> Last name parameter. </param>
-        </member>
-        <member name="M:FileCabinetApp.CustomValidator.CheckForValidDataInAge(System.Int16)">
+        <member name="M:FileCabinetApp.CustomValidator.CheckAge(System.Int16)">
             <summary>
             Checks age parameter for valid data.
             </summary>
             <param name="age"> Age parameter. </param>
         </member>
-        <member name="M:FileCabinetApp.CustomValidator.CheckForValidDataInIncomePerYear(System.Decimal)">
+        <member name="M:FileCabinetApp.CustomValidator.CheckIncome(System.Decimal)">
             <summary>
             Checks income parameter for valid data.
             </summary>
@@ -56,49 +108,52 @@
             Default validation rules class.
             </summary>
         </member>
+        <member name="M:FileCabinetApp.DefaultValidator.ValidateFirstName(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:FileCabinetApp.DefaultValidator.ValidateLastName(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:FileCabinetApp.DefaultValidator.ValidateAge(System.Int16)">
+            <inheritdoc/>
+        </member>
+        <member name="M:FileCabinetApp.DefaultValidator.ValidateDate(System.DateTime)">
+            <inheritdoc/>
+        </member>
+        <member name="M:FileCabinetApp.DefaultValidator.ValidateIncome(System.Decimal)">
+            <inheritdoc/>
+        </member>
         <member name="M:FileCabinetApp.DefaultValidator.ValidateParameters(FileCabinetApp.CreateRecordParameters)">
             <summary>
             Validation method with default rules.
             </summary>
             <param name="parameters"> Parameter for creating record. </param>
         </member>
-        <member name="M:FileCabinetApp.DefaultValidator.CheckForNullInFirstName(System.String)">
+        <member name="M:FileCabinetApp.DefaultValidator.CheckFirstName(System.String)">
             <summary>
-            Checks first name parameter for null.
+            Checks FirstName parameter to be suitable.
             </summary>
             <param name="firstName"> First name parameter. </param>
         </member>
-        <member name="M:FileCabinetApp.DefaultValidator.CheckForValidDataInFirstName(System.String)">
+        <member name="M:FileCabinetApp.DefaultValidator.CheckLastName(System.String)">
             <summary>
-            Checks first name parameter for valid data.
-            </summary>
-            <param name="firstName"> First name parameter. </param>
-        </member>
-        <member name="M:FileCabinetApp.DefaultValidator.CheckForNullInLastName(System.String)">
-            <summary>
-            Checks last name parameter for null.
+            Checks LastName parameter to be suitable.
             </summary>
             <param name="lastName"> Last name parameter. </param>
         </member>
-        <member name="M:FileCabinetApp.DefaultValidator.CheckForValidDataInLastName(System.String)">
-            <summary>
-            Checks last name parameter for valid data.
-            </summary>
-            <param name="lastName"> Last name parameter. </param>
-        </member>
-        <member name="M:FileCabinetApp.DefaultValidator.CheckForValidDataInAge(System.Int16)">
+        <member name="M:FileCabinetApp.DefaultValidator.CheckAge(System.Int16)">
             <summary>
             Checks age parameter for valid data.
             </summary>
             <param name="age"> Age parameter. </param>
         </member>
-        <member name="M:FileCabinetApp.DefaultValidator.CheckForValidDataInDateOfBirthday(System.DateTime)">
+        <member name="M:FileCabinetApp.DefaultValidator.CheckDate(System.DateTime)">
             <summary>
             Checks birthday parameter for valid data.
             </summary>
             <param name="dateOfBirth"> Birthday parameter. </param>
         </member>
-        <member name="M:FileCabinetApp.DefaultValidator.CheckForValidDataInIncomePerYear(System.Decimal)">
+        <member name="M:FileCabinetApp.DefaultValidator.CheckIncome(System.Decimal)">
             <summary>
             Checks income parameter for valid data.
             </summary>
@@ -231,6 +286,9 @@
         <member name="M:FileCabinetApp.FileCabinetService.GetStat">
             <inheritdoc/>
         </member>
+        <member name="M:FileCabinetApp.FileCabinetService.GetRecordValidator">
+            <inheritdoc/>
+        </member>
         <member name="T:FileCabinetApp.IFileCabinetServise`1">
             <summary>
             Interface for realisation FileCabietServises.
@@ -249,6 +307,12 @@
             </summary>
             <returns> Returns number of records. </returns>
         </member>
+        <member name="M:FileCabinetApp.IFileCabinetServise`1.GetRecordValidator">
+            <summary>
+            Returns sertain validator.
+            </summary>
+            <returns> Returns sertaion record validator. </returns>
+        </member>
         <member name="T:FileCabinetApp.IRecordValidator`1">
             <summary>
             Inerface for realisation parameter validation.
@@ -260,6 +324,61 @@
             Validates parameters.
             </summary>
             <param name="parameters"> Parameters to validate. </param>
+        </member>
+        <member name="M:FileCabinetApp.IRecordValidator`1.ValidateFirstName(System.String)">
+            <summary>
+            Method for first name validation.
+            </summary>
+            <param name="value"> Value to validate. </param>
+            <returns>
+            Returns tuple with two values:
+            Bool value, is true if value is validated, otherwise false.
+            String value contains validation message.
+            </returns>
+        </member>
+        <member name="M:FileCabinetApp.IRecordValidator`1.ValidateLastName(System.String)">
+            <summary>
+            Method for last name validation.
+            </summary>
+            <param name="value"> Value to validate. </param>
+            <returns>
+            Returns tuple with two values:
+            Bool value, is true if value is validated, otherwise false.
+            String value contains validation message.
+            </returns>
+        </member>
+        <member name="M:FileCabinetApp.IRecordValidator`1.ValidateAge(System.Int16)">
+            <summary>
+            Method for age validation.
+            </summary>
+            <param name="value"> Value to validate. </param>
+            <returns>
+            Returns tuple with two values:
+            Bool value, is true if value is validated, otherwise false.
+            String value contains validation message.
+            </returns>
+        </member>
+        <member name="M:FileCabinetApp.IRecordValidator`1.ValidateDate(System.DateTime)">
+            <summary>
+            Method for date validation.
+            </summary>
+            <param name="value"> Value to validate. </param>
+            <returns>
+            Returns tuple with two values:
+            Bool value, is true if value is validated, otherwise false.
+            String value contains validation message.
+            </returns>
+        </member>
+        <member name="M:FileCabinetApp.IRecordValidator`1.ValidateIncome(System.Decimal)">
+            <summary>
+            Method for income validation.
+            </summary>
+            <param name="value"> Value to validate. </param>
+            <returns>
+            Returns tuple with two values:
+            Bool value, is true if value is validated, otherwise false.
+            String value contains validation message.
+            </returns>
         </member>
         <member name="T:FileCabinetApp.CreateRecordParameters">
             <summary>

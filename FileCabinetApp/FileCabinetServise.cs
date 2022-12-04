@@ -112,4 +112,10 @@ public class FileCabinetService : IFileCabinetServise<FileCabinetRecord>
     {
         return this.list.Count;
     }
+
+    /// <inheritdoc/>
+    public IRecordValidator<CreateRecordParameters> GetRecordValidator()
+    {
+        return this.validator;
+    }
 }
