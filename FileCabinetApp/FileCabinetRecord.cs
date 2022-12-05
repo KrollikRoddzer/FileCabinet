@@ -46,6 +46,7 @@ public class FileCabinetRecord
     /// <inheritdoc/>
     public override string ToString()
     {
-        return $"#{this.Id}, {this.FirstName}, {this.LastName}, Age: {this.Age}, {this.DateOfBirth.ToString("yyyy-MMM-dd", CultureInfo.CreateSpecificCulture("en-US"))}, Income per year: {this.IncomePerYear:0.00}$";
+        string income = this.IncomePerYear.ToString("C2", new CultureInfo("en-US")).Replace(",", string.Empty);
+        return string.Format("{0}, {1}, {2}, {3}, {4}, {5}", this.Id, this.FirstName, this.LastName, this.Age, this.DateOfBirth.ToString("yyyy-MMM-dd", CultureInfo.CreateSpecificCulture("en-US")), income);
     }
 }

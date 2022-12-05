@@ -238,6 +238,23 @@
         <member name="M:FileCabinetApp.FileCabinetRecord.ToString">
             <inheritdoc/>
         </member>
+        <member name="T:FileCabinetApp.FileCabinetRecordCsvWriter">
+            <summary>
+            Class for writing data into csv file.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetRecordCsvWriter.#ctor(System.IO.TextWriter)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FileCabinetApp.FileCabinetRecordCsvWriter"/> class.
+            </summary>
+            <param name="writer"> Object that writes data in file. </param>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetRecordCsvWriter.Write(FileCabinetApp.FileCabinetRecord)">
+            <summary>
+            Writes one record in file.
+            </summary>
+            <param name="record"> Object representing one record. </param>
+        </member>
         <member name="T:FileCabinetApp.FileCabinetService">
             <summary>
             Class that holds every command in application.
@@ -289,6 +306,26 @@
         <member name="M:FileCabinetApp.FileCabinetService.GetRecordValidator">
             <inheritdoc/>
         </member>
+        <member name="M:FileCabinetApp.FileCabinetService.MakeSnapshot">
+            <inheritdoc/>
+        </member>
+        <member name="T:FileCabinetApp.FileCabinetServiseSnapshot">
+            <summary>
+            Class for storing history of added records in <see cref="T:FileCabinetApp.FileCabinetService"/>.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetServiseSnapshot.#ctor(FileCabinetApp.FileCabinetRecord[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:FileCabinetApp.FileCabinetServiseSnapshot"/> class.
+            </summary>
+            <param name="records"> Osbject that holds each record. </param>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetServiseSnapshot.SaveToCsv(System.IO.StreamWriter)">
+            <summary>
+            Saves data into svc file.
+            </summary>
+            <param name="streamWriter"> <see cref="T:System.IO.StreamWriter"/> object that writes data in file. </param>
+        </member>
         <member name="T:FileCabinetApp.IFileCabinetServise`1">
             <summary>
             Interface for realisation FileCabietServises.
@@ -312,6 +349,12 @@
             Returns sertain validator.
             </summary>
             <returns> Returns sertaion record validator. </returns>
+        </member>
+        <member name="M:FileCabinetApp.IFileCabinetServise`1.MakeSnapshot">
+            <summary>
+            Creates a shapshot(copy of records).
+            </summary>
+            <returns> Returns a shaphot of FileCabinetServise. </returns>
         </member>
         <member name="T:FileCabinetApp.IRecordValidator`1">
             <summary>
