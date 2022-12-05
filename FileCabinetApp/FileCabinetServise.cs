@@ -118,4 +118,10 @@ public class FileCabinetService : IFileCabinetServise<FileCabinetRecord>
     {
         return this.validator;
     }
+
+    /// <inheritdoc/>
+    public FileCabinetServiseSnapshot MakeSnapshot()
+    {
+        return new FileCabinetServiseSnapshot(this.list.ToArray());
+    }
 }

@@ -29,6 +29,7 @@ namespace FileCabinetApp
             new Tuple<string, Action<string>>("list", List),
             new Tuple<string, Action<string>>("edit", Edit),
             new Tuple<string, Action<string>>("find", Find),
+            new Tuple<string, Action<string>>("export", Export),
         };
 
         private static string[][] helpMessages = new string[][]
@@ -40,6 +41,7 @@ namespace FileCabinetApp
             new string[] { "list", "shows all records.", "The 'list' command shows all records." },
             new string[] { "edit", "edits a record.", "The 'edit' command edits a record." },
             new string[] { "find", "finding list of elements in record which satisfing some criteria.", "The 'find' command is finding list of elements in record which satisfing some criteria." },
+            new string[] { "export", "export records into a file.", "The 'export' command is exporting rocords into a file." },
         };
 
         /// <summary>
@@ -336,6 +338,104 @@ namespace FileCabinetApp
             {
                 Console.WriteLine(el);
             }
+        }
+
+        private static void Export(string parameters)
+        {
+            var p = parameters.Split(' ');
+            if (p.Length != 2)
+            {
+                Console.WriteLine("Inapropriate use of export.\n> export {format} {path}");
+            }
+
+            try
+            {
+                switch (p[0])
+                {
+                    case "csv":
+                        if (!CheckForSuffix(p[1], ".csv"))
+                        {
+                            throw new ArgumentException("Unknow file format.");
+                        }
+
+                        if (CheckForExistance(p[1]).Equals("n"))
+                        {
+                            break;
+                        }
+
+                        var writerCsv = new StreamWriter(p[1]);
+                        FileCabinetServiseSnapshot snapshot = fileCabinetService.MakeSnapshot();
+                        snapshot.SaveToCsv(writerCsv);
+                        writerCsv.Close();
+                        writerCsv.Dispose();
+                        Console.WriteLine($"All records are exported to file {p[1]}.");
+                        break;
+
+                    case "xml":
+                        if (!CheckForSuffix(p[1], ".xml"))
+                        {
+                            throw new DirectoryNotFoundException();
+                        }
+
+                        if (CheckForExistance(p[1]).Equals("n"))
+                        {
+                            break;
+                        }
+
+                        var writerXml = new StreamWriter(p[1]);
+                        FileCabinetServiseSnapshot snapshotXml = fileCabinetService.MakeSnapshot();
+                        snapshotXml.SaveToXml(writerXml);
+                        writerXml.Close();
+                        writerXml.Dispose();
+                        Console.WriteLine($"All records are exported to file {p[1]}.");
+                        break;
+
+                    default:
+                        Console.WriteLine($"There is no such format as {p[0]}.");
+                        break;
+                }
+            }
+            catch (DirectoryNotFoundException)
+            {
+                Console.WriteLine($"Export failed: can't open file {p[1]}.");
+            }
+        }
+
+        private static bool CheckForSuffix(string check, string suffix)
+        {
+            if (check.Length < 4)
+            {
+                return false;
+            }
+
+            return check[(check.Length - 4) ..check.Length].Equals(suffix);
+        }
+
+        private static string CheckForExistance(string path)
+        {
+            if (File.Exists(path))
+            {
+                string res;
+                Console.WriteLine($"File is exist - rewrite {path}? [Y/n]");
+                while (true)
+                {
+                    res = Console.ReadLine();
+                    if (res == "Y")
+                    {
+                        return res;
+                    }
+                    else if (res == "n")
+                    {
+                        return res;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Unknow command. Try again.");
+                    }
+                }
+            }
+
+            return "Not exists";
         }
 
         private class Options

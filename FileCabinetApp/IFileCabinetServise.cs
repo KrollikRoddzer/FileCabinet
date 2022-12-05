@@ -25,4 +25,10 @@ public interface IFileCabinetServise<TValue>
     /// </summary>
     /// <returns> Returns sertaion record validator. </returns>
     public IRecordValidator<CreateRecordParameters> GetRecordValidator();
+
+    /// <summary>
+    /// Creates a shapshot(copy of records).
+    /// </summary>
+    /// <returns> Returns a shaphot of FileCabinetServise. </returns>
+    public FileCabinetServiseSnapshot MakeSnapshot();
 }
