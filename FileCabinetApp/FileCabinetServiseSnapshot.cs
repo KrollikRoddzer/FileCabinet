@@ -1,4 +1,6 @@
-﻿namespace FileCabinetApp;
+﻿using System.Xml;
+
+namespace FileCabinetApp;
 
 /// <summary>
 /// Class for storing history of added records in <see cref="FileCabinetService"/>.
@@ -27,5 +29,27 @@ public class FileCabinetServiseSnapshot
         {
             writer.Write(record);
         }
+    }
+
+    /// <summary>
+    /// Saves data into xml file.
+    /// </summary>
+    /// <param name="streamWriter"> <see cref="StreamWriter"/> object that writes data in file. </param>
+    public void SaveToXml(StreamWriter streamWriter)
+    {
+        using XmlWriter writer = XmlWriter.Create(streamWriter, new XmlWriterSettings()
+        {
+            Indent = true,
+        });
+        var fileCabinetRecordXmlWriter = new FileCabinetRecordXmlWriter(writer);
+        writer.WriteStartDocument();
+        writer.WriteStartElement("records");
+        foreach (var record in this.records)
+        {
+            fileCabinetRecordXmlWriter.Write(record);
+        }
+
+        writer.WriteEndElement();
+        writer.WriteEndDocument();
     }
 }

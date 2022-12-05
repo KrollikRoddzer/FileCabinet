@@ -363,11 +363,30 @@ namespace FileCabinetApp
                             break;
                         }
 
-                        var writer = new StreamWriter(p[1]);
+                        var writerCsv = new StreamWriter(p[1]);
                         FileCabinetServiseSnapshot snapshot = fileCabinetService.MakeSnapshot();
-                        snapshot.SaveToCsv(writer);
-                        writer.Close();
-                        writer.Dispose();
+                        snapshot.SaveToCsv(writerCsv);
+                        writerCsv.Close();
+                        writerCsv.Dispose();
+                        Console.WriteLine($"All records are exported to file {p[1]}.");
+                        break;
+
+                    case "xml":
+                        if (!CheckForSuffix(p[1], ".xml"))
+                        {
+                            throw new DirectoryNotFoundException();
+                        }
+
+                        if (CheckForExistance(p[1]).Equals("n"))
+                        {
+                            break;
+                        }
+
+                        var writerXml = new StreamWriter(p[1]);
+                        FileCabinetServiseSnapshot snapshotXml = fileCabinetService.MakeSnapshot();
+                        snapshotXml.SaveToXml(writerXml);
+                        writerXml.Close();
+                        writerXml.Dispose();
                         Console.WriteLine($"All records are exported to file {p[1]}.");
                         break;
 

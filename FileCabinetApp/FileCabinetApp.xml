@@ -255,6 +255,23 @@
             </summary>
             <param name="record"> Object representing one record. </param>
         </member>
+        <member name="T:FileCabinetApp.FileCabinetRecordXmlWriter">
+            <summary>
+            Class for writing data in xml file.
+            </summary>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetRecordXmlWriter.#ctor(System.Xml.XmlWriter)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FileCabinetApp.FileCabinetRecordXmlWriter"/> class.
+            </summary>
+            <param name="writer"> Object that writes data in file. </param>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetRecordXmlWriter.Write(FileCabinetApp.FileCabinetRecord)">
+            <summary>
+            Writes one record in file.
+            </summary>
+            <param name="record"> Object representing one record. </param>
+        </member>
         <member name="T:FileCabinetApp.FileCabinetService">
             <summary>
             Class that holds every command in application.
@@ -323,6 +340,12 @@
         <member name="M:FileCabinetApp.FileCabinetServiseSnapshot.SaveToCsv(System.IO.StreamWriter)">
             <summary>
             Saves data into svc file.
+            </summary>
+            <param name="streamWriter"> <see cref="T:System.IO.StreamWriter"/> object that writes data in file. </param>
+        </member>
+        <member name="M:FileCabinetApp.FileCabinetServiseSnapshot.SaveToXml(System.IO.StreamWriter)">
+            <summary>
+            Saves data into xml file.
             </summary>
             <param name="streamWriter"> <see cref="T:System.IO.StreamWriter"/> object that writes data in file. </param>
         </member>
